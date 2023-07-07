@@ -46,18 +46,18 @@
 		<div class="row text-bg-dark rounded p-3">
 			<div class="col d-flex flex-column">
 
-				<form action="Controller" method="post">
+				<form action="controller" method="post">
 
-					<input type="hidden" name="command" value="registration"> <label
-						class="form-label">${first_name}</label>
+					<input type="hidden" name="command" value="do_registration">
+					<label class="form-label">${first_name}</label>
 					<div class="row p-1">
-						<input type="text" name="first name" class="form-control"
+						<input type="text" name="name" class="form-control"
 							placeholder="${enter_first_name}">
 					</div>
 
 					<label class="form-label">${last_name}</label>
 					<div class="row p-1">
-						<input type="text" name="last name" class="form-control"
+						<input type="text" name="surname" class="form-control"
 							placeholder="${enter_last_name}">
 					</div>
 
@@ -81,7 +81,7 @@
 
 					<label class="form-label">${repeat_password}</label>
 					<div class="row p-1">
-						<input type="password" name="repeat password" class="form-control"
+						<input type="password" name="repeat_password" class="form-control"
 							placeholder="${repeat_password}">
 					</div>
 
@@ -112,6 +112,14 @@
 					<a class="btn btn-dark btn-outline-light"
 						href="controller?command=go_to_authentication">${back}</a>
 				</div>
+
+				<div class="row d-flex justify-content-center p-1 text-danger">
+					<c:if test="${requestScope.error != null}">
+						<fmt:message bundle="${loc}" key="${requestScope.error}" var="error" />
+						<c:out value="${error}" />
+					</c:if>
+				</div>
+
 			</div>
 		</div>
 	</div>

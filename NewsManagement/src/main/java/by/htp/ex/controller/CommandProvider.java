@@ -11,6 +11,7 @@ import by.htp.ex.controller.impl.GoToNewsList;
 import by.htp.ex.controller.impl.GoToRegistration;
 import by.htp.ex.controller.impl.GoToViewNews;
 import by.htp.ex.controller.impl.ChangeLocal;
+import by.htp.ex.controller.impl.DoRegistration;
 
 public final class CommandProvider {
 	private final Map<CommandName, Command> commands = new HashMap<>();
@@ -20,6 +21,7 @@ public final class CommandProvider {
 	private CommandProvider() {
 		commands.put(CommandName.GO_TO_BASE_PAGE, new GoToBasePage());
 		commands.put(CommandName.GO_TO_REGISTRATION, new GoToRegistration());
+		commands.put(CommandName.DO_REGISTRATION, new DoRegistration());
 		commands.put(CommandName.DO_SIGN_IN, new DoSIgnIn());
 		commands.put(CommandName.DO_SIGN_OUT, new DoSignOut());
 		commands.put(CommandName.GO_TO_NEWS_LIST, new GoToNewsList());

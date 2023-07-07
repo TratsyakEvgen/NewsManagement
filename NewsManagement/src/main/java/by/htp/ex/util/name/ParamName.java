@@ -1,11 +1,14 @@
 package by.htp.ex.util.name;
 
 public class ParamName {
+	private ParamName() {
+	}
 	public static final String GO_TO_BACK = "go_to_back";
 	public static final String COMMAND = "command";
 	public static final String LOCAL = "local";
 	public static final String LOGIN = "login";
 	public static final String PASSWORD = "password";
+	public static final String REPEAT_PASSWORD = "repeat_password";
 	public static final String ROLE = "role";
 	public static final String PRESENTATION = "presentation";
 	public static final String ERROR = "error";

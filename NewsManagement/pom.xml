@@ -37,7 +37,12 @@
 			<version>8.0.33</version>
 		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>edu.check.webapp</groupId>
+			<artifactId>check-webapp</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  </dependencies>
   
   <build>
     <plugins>

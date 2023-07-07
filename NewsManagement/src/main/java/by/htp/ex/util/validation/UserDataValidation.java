@@ -1,15 +1,26 @@
 package by.htp.ex.util.validation;
 
+import by.htp.ex.bean.User;
+
 public interface UserDataValidation {
-	boolean isLogin(String login);
+	void isLogin(String login) throws ValidationException;
 
-	boolean isPassword(String password);
+	void isPassword(String password) throws ValidationException;
 
-	boolean isEmail(String email);
+	void isEmail(String email) throws ValidationException;
 
-	boolean isName(String name);
+	void isName(String name) throws ValidationException;
+	
+	void isSurname(String surname) throws ValidationException;
 
-	boolean isAuthData(String login, String password);
+	void isAuthData(String login, String password) throws ValidationException;
+
+	void isRegistrationData(User user, String repeatPassword) throws ValidationException;
+
+	void checkMatchPasswords(String password, String repeatPassword) throws ValidationException;
+
+
+	
 
 
 }

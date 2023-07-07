@@ -1,7 +1,6 @@
 package by.htp.ex.util.name;
 
-public class DBParamName {
-	
+public final class DBParamName {	
 	private DBParamName() {};
 	
 	public static final String DB_DRIVER = "db.driver";

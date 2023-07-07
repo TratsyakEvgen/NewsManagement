@@ -4,16 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class User implements Serializable{	
-	
+public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private String role;
 	private String name;
 	private String surname;
 	private String email;
 	private Date registerDate;
+	private String login;
+	private String password;
 
 	public User() {
 	}
@@ -65,12 +67,26 @@ public class User implements Serializable{
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	
 
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, name, registerDate, role, surname);
+		return Objects.hash(email, id, login, name, password, registerDate, role, surname);
 	}
 
 	@Override
@@ -82,15 +98,18 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
+		return Objects.equals(email, other.email) && id == other.id && Objects.equals(login, other.login)
+				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
 				&& Objects.equals(registerDate, other.registerDate) && Objects.equals(role, other.role)
 				&& Objects.equals(surname, other.surname);
 	}
 
 	@Override
 	public String toString() {
-		return this.getClass().getName() + " [id=" + id + ", role=" + role + ", name=" + name + ", surname=" + surname + ", email=" + email
-				+ ", registerDate=" + registerDate + "]";
+		return "User [id=" + id + ", role=" + role + ", name=" + name + ", surname=" + surname + ", email=" + email
+				+ ", registerDate=" + registerDate + ", login=" + login + ", password=" + password + "]";
 	}
+
+	
 
 }

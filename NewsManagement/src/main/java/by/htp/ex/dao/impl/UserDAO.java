@@ -53,7 +53,7 @@ public class UserDAO implements IUserDAO {
 	private static final String QUERY_FIND_PASSWORD_BY_ID = "SELECT users.password FROM users WHERE users.id =?";
 
 	@Override
-	public boolean equalsPassword(int id, String password) throws DaoException {
+	public boolean matchPasswords(int id, String password) throws DaoException {
 		try (Connection connection = connectionPool.takeConnection();
 				PreparedStatement statment = connection.prepareStatement(QUERY_FIND_PASSWORD_BY_ID)) {
 
@@ -66,7 +66,7 @@ public class UserDAO implements IUserDAO {
 			}
 
 		} catch (SQLException | ConnectionPoolException e) {
-			throw new DaoException("Query to DB return error in method \"equalsPassword\".", e);
+			throw new DaoException("Query to DB return error in method \"matchPasswords\".", e);
 		}
 	}
 }
