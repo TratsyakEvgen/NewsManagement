@@ -19,5 +19,6 @@ public class ParamName {
 	public static final String EMAIL = "email";
 	public static final String REGISTER_DATE = "register_date";	
 	public static final String USER = "user";
+	public static final String ENCODING = "encoding";
 
 }

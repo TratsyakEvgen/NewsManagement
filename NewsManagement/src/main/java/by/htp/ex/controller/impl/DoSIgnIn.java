@@ -34,6 +34,8 @@ public class DoSIgnIn implements Command {
 			throw new ServletException(e);
 		} catch (ServiceUserExeption e) {
 			request.setAttribute(ParamName.ERROR, e.getMessage());
+			request.setAttribute(ParamName.LOGIN, login);
+			request.setAttribute(ParamName.PASSWORD, password);
 			request.getRequestDispatcher(LinkName.COMMAND_GO_TO_AUTHENTICATION).forward(request, response);
 		}
 

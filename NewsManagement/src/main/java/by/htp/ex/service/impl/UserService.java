@@ -1,10 +1,18 @@
 package by.htp.ex.service.impl;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.concurrent.locks.ReentrantLock;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import by.htp.ex.bean.User;
 import by.htp.ex.dao.DaoException;
 import by.htp.ex.dao.DaoProvider;
 import by.htp.ex.dao.IUserDAO;
+import by.htp.ex.util.lock.ReentrantLockSingleton;
 import by.htp.ex.util.name.LocalName;
+import by.htp.ex.util.name.ParamName;
 import by.htp.ex.util.validation.UserDataValidation;
 import by.htp.ex.util.validation.ValidationException;
 import by.htp.ex.util.validation.ValidationProvider;
@@ -25,6 +33,7 @@ public class UserService implements IUserService {
 		} catch (ValidationException e) {
 			throw new ServiceUserExeption(e.getMessage());
 		}
+		
 
 		User user = null;
 
@@ -46,14 +55,37 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public boolean registration(User user, String repeatPassword) throws ServiceUserExeption {
+	public boolean registration(User user, String repeatPassword) throws ServiceUserExeption, ServiceException {
 		try {
 			userDataValidation.isRegistrationData(user, repeatPassword);
 		} catch (ValidationException e) {
 			throw new ServiceUserExeption(e.getMessage());
 		}
+		
+		user.setRole(ParamName.USER);
+		user.setRegisterDate(Date.valueOf(LocalDate.now()));
+		user.setPassword(getHashPassword(user.getPassword()));
+		
+		ReentrantLock reentrantLock = ReentrantLockSingleton.getInstance();
+	
+		try {
+			reentrantLock.lock();
+			if (userDAO.isExistLogin(user.getLogin())){
+				throw new ServiceUserExeption(LocalName.LOGIN_EXISTS);
+			}
+			userDAO.createUser(user);
+		} catch (DaoException e) {
+			throw new ServiceException("Registration failed", e);
+		} finally {
+			reentrantLock.unlock();
+		}
 
-		return false;
+		return true;
+	}
+	
+	private String getHashPassword(String password) {
+		String salt = BCrypt.gensalt();
+		return BCrypt.hashpw(password, salt);
 	}
 
 }

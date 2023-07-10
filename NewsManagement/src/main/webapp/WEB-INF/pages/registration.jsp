@@ -27,7 +27,7 @@
 <fmt:message bundle="${loc}" key="local.register" var="register" />
 <fmt:message bundle="${loc}" key="local.registration" var="registration" />
 <fmt:message bundle="${loc}" key="local.back" var="back" />
-
+<fmt:message bundle="${loc}" key="local.you.are.registered" var="you_are_registered" />
 
 
 <!DOCTYPE html>
@@ -52,37 +52,37 @@
 					<label class="form-label">${first_name}</label>
 					<div class="row p-1">
 						<input type="text" name="name" class="form-control"
-							placeholder="${enter_first_name}">
+							placeholder="${enter_first_name}" value="${requestScope.user.name}">
 					</div>
 
 					<label class="form-label">${last_name}</label>
 					<div class="row p-1">
 						<input type="text" name="surname" class="form-control"
-							placeholder="${enter_last_name}">
+							placeholder="${enter_last_name}" value="${requestScope.user.surname}">
 					</div>
 
 					<label class="form-label">${email}</label>
 					<div class="row p-1">
 						<input type="email" name="email" class="form-control"
-							placeholder="${enter_email}">
+							placeholder="${enter_email}" value="${requestScope.user.email}">
 					</div>
 
 					<label class="form-label">${login}</label>
 					<div class="row p-1">
 						<input type="text" name="login" class="form-control"
-							placeholder="${enter_login}">
+							placeholder="${enter_login}" value="${requestScope.user.login}">
 					</div>
 
 					<label class="form-label">${password}</label>
 					<div class="row p-1">
 						<input type="password" name="password" class="form-control"
-							placeholder="${enter_password}">
+							placeholder="${enter_password}" value="${requestScope.user.password}">
 					</div>
 
 					<label class="form-label">${repeat_password}</label>
 					<div class="row p-1">
 						<input type="password" name="repeat_password" class="form-control"
-							placeholder="${repeat_password}">
+							placeholder="${repeat_password}" value="${requestScope.repeat_password}">
 					</div>
 
 					<div class="row p-1">
@@ -119,6 +119,12 @@
 						<c:out value="${error}" />
 					</c:if>
 				</div>
+				
+				<div class="row d-flex justify-content-center p-1 text-warning">	
+					<c:if test="${param.message == 'done'}">
+						<c:out value="${you_are_registered}" />
+					</c:if>
+				</div>	
 
 			</div>
 		</div>

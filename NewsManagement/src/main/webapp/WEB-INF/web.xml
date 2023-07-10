@@ -26,6 +26,20 @@
 	<listener>
 		<listener-class>by.htp.ex.controller.listener.ContextListener</listener-class>
 	</listener>
+	
+	<filter>
+		<filter-name>Encoding</filter-name>
+		<filter-class>by.htp.ex.controller.filter.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Encoding</filter-name>
+		<servlet-name>/controller</servlet-name>
+	</filter-mapping>
 
 	<error-page>
 		<error-code>500</error-code>

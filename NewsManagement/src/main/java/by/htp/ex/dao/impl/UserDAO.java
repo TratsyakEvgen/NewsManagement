@@ -1,9 +1,14 @@
 package by.htp.ex.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Savepoint;
+import java.sql.Statement;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import by.htp.ex.bean.User;
 import by.htp.ex.dao.DaoException;
@@ -43,12 +48,17 @@ public class UserDAO implements IUserDAO {
 				}
 			}
 
-		} catch (SQLException | ConnectionPoolException e) {
-			throw new DaoException("Query to DB return error in method \"findByLogin\".", e);
+		} catch (SQLException e) {
+			throw new DaoException("SQLException find user by login.", e);
+		} catch (ConnectionPoolException e) {
+			throw new DaoException("Сonnection setup error find user by login.", e);
 		}
 
 		return user;
 	}
+	
+	
+	
 
 	private static final String QUERY_FIND_PASSWORD_BY_ID = "SELECT users.password FROM users WHERE users.id =?";
 
@@ -60,13 +70,97 @@ public class UserDAO implements IUserDAO {
 			statment.setString(1, String.valueOf(id));
 			try (ResultSet resultSet = statment.executeQuery()) {
 				if (resultSet.next()) {
-					return password.equals(resultSet.getString(ParamName.PASSWORD));
+					return BCrypt.checkpw(password, resultSet.getString(ParamName.PASSWORD));
 				}
 				return false;
 			}
 
-		} catch (SQLException | ConnectionPoolException e) {
-			throw new DaoException("Query to DB return error in method \"matchPasswords\".", e);
+		} catch (SQLException e) {
+			throw new DaoException("SQLException find password by id.", e);
+		} catch (ConnectionPoolException e) {
+			throw new DaoException("Сonnection setup error find password by id.", e);
 		}
 	}
+	
+	
+	private static final String QUERY_FIND_LOGIN = "SELECT users.login FROM users WHERE users.login =?";
+
+	@Override
+	public boolean isExistLogin(String login) throws DaoException {
+		try (Connection connection = connectionPool.takeConnection();
+				PreparedStatement statment = connection.prepareStatement(QUERY_FIND_LOGIN)) {
+
+			statment.setString(1, String.valueOf(login));
+			try (ResultSet resultSet = statment.executeQuery()) {
+				return resultSet.next();
+			}
+
+		} catch (SQLException e) {
+			throw new DaoException("SQLException find login.", e);
+		} catch (ConnectionPoolException e) {
+			throw new DaoException("Сonnection setup error find login.", e);
+		}
+	}
+	
+	
+	
+	
+	private static final String QUERY_INSERT_USERS = "INSERT INTO users (users.login, users.password, users.roles_id) VALUE (?,?,(SELECT roles.id FROM roles WHERE roles.role=?))";
+	private static final String QUERY_INSERT_USER_DITAILES = "INSERT INTO user_detailes VALUE (?,?,?,?,?)";	
+	private static final String DB_SAVE_POINT = "Savepoint";	
+
+	@Override
+	public void createUser(User user) throws DaoException {
+		try (Connection connection = connectionPool.takeConnection()){
+			connection.setAutoCommit(false);
+			Savepoint savepoint = connection.setSavepoint(DB_SAVE_POINT);
+			
+			int id = 0;
+			try (PreparedStatement statment = connection.prepareStatement(QUERY_INSERT_USERS, Statement.RETURN_GENERATED_KEYS)){
+				
+				statment.setString(1, user.getLogin());
+				statment.setString(2, user.getPassword());
+				statment.setString(3, user.getRole());
+				statment.executeUpdate();					
+				
+				try (ResultSet resultSet = statment.getGeneratedKeys()){
+					if (resultSet.next()) {
+						id = resultSet.getInt(1);
+					}
+				}
+			} catch(SQLException e){
+				connection.rollback(savepoint);	
+				connection.releaseSavepoint(savepoint);
+				connection.setAutoCommit(true);
+				throw new DaoException("Error in query INSERT users.", e);
+			}
+			
+				
+			try (PreparedStatement statmentDetailes = connection.prepareStatement(QUERY_INSERT_USER_DITAILES)){	
+
+				statmentDetailes.setInt(1, id);
+				statmentDetailes.setString(2, user.getName());
+				statmentDetailes.setString(3, user.getSurname());
+				statmentDetailes.setString(4, user.getEmail());
+				statmentDetailes.setDate(5, (Date) user.getRegisterDate());
+				statmentDetailes.executeUpdate();
+				connection.commit();
+			} catch(SQLException e){
+				connection.rollback(savepoint);
+				connection.releaseSavepoint(savepoint);
+				connection.setAutoCommit(true);
+				throw new DaoException("Error in query INSERT user_ditails.", e);
+			}
+			
+		} catch (SQLException e) {
+			throw new DaoException("Error commit connection.", e);
+		} catch (ConnectionPoolException e) {
+			throw new DaoException("Сonnection setup error create user.", e);
+		}
+
+	}
+
 }
+
+	
+	
