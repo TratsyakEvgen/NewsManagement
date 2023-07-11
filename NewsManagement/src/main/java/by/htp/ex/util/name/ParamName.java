@@ -10,9 +10,11 @@ public class ParamName {
 	public static final String PASSWORD = "password";
 	public static final String REPEAT_PASSWORD = "repeat_password";
 	public static final String ROLE = "role";
-	public static final String PRESENTATION = "presentation";
+	public static final String MENU_PRESENTATION = "menu_presentation";
+	public static final String BODY_PRESENTATION = "body_presentation";
 	public static final String ERROR = "error";
 	public static final String NEWS_LIST = "newsList";
+	public static final String VIEW_NEWS = "viewList";
 	public static final String ID = "id";
 	public static final String NAME = "name";
 	public static final String SURNAME = "surname";
@@ -20,5 +22,6 @@ public class ParamName {
 	public static final String REGISTER_DATE = "register_date";	
 	public static final String USER = "user";
 	public static final String ENCODING = "encoding";
+	public static final String NEWS = "news";
 
 }

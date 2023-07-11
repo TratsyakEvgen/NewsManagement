@@ -1,37 +1,32 @@
 package by.htp.ex.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class News implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer idNews = 0;
-	private String title = "";
-	private String briefNews = "";
+	private Integer id = 0;
+	private String title;
+	private String link;
 	private Date newsDate;
-	private List<Integer> styles = new ArrayList<>();
-	private List<Integer> images = new ArrayList<>();
-
-	public News(int idNews, String title, String briefNews, Date newsDate, List<Integer> styles, List<Integer> images) {
-		super();
-		this.idNews = idNews;
-		this.title = title;
-		this.briefNews = briefNews;
-		this.newsDate = newsDate;
-		this.styles = styles;
-		this.images = images;
+	private boolean status;
+	private List<Image> images;
+	private String local;
+	private User author;
+	
+	public News() {		
 	}
 
-	public Integer getIdNews() {
-		return idNews;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdNews(Integer idNews) {
-		this.idNews = idNews;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -42,12 +37,12 @@ public class News implements Serializable {
 		this.title = title;
 	}
 
-	public String getBriefNews() {
-		return briefNews;
+	public String getLink() {
+		return link;
 	}
 
-	public void setBriefNews(String briefNews) {
-		this.briefNews = briefNews;
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public Date getNewsDate() {
@@ -58,20 +53,66 @@ public class News implements Serializable {
 		this.newsDate = newsDate;
 	}
 
-	public List<Integer> getImages() {
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public List<Image> getImages() {
 		return images;
 	}
 
-	public void setImages(List<Integer> images) {
+	public void setImages(List<Image> images) {
 		this.images = images;
 	}
 
-	public List<Integer> getStyles() {
-		return styles;
+	public String getLocal() {
+		return local;
 	}
 
-	public void setStyles(List<Integer> styles) {
-		this.styles = styles;
+	public void setLocal(String local) {
+		this.local = local;
 	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(author, id, images, link, local, newsDate, status, title);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		News other = (News) obj;
+		return Objects.equals(author, other.author) && Objects.equals(id, other.id)
+				&& Objects.equals(images, other.images) && Objects.equals(link, other.link)
+				&& Objects.equals(local, other.local) && Objects.equals(newsDate, other.newsDate)
+				&& status == other.status && Objects.equals(title, other.title);
+	}
+
+	@Override
+	public String toString() {
+		return "News [id=" + id + ", title=" + title + ", link=" + link + ", newsDate=" + newsDate + ", status="
+				+ status + ", images=" + images + ", local=" + local + ", author=" + author + "]";
+	}
+
+	
+
+
 
 }

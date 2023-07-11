@@ -1,7 +1,8 @@
 package by.htp.ex.service.impl;
 
-import java.text.ParseException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import by.htp.ex.bean.News;
 import by.htp.ex.dao.DaoProvider;
@@ -10,54 +11,25 @@ import by.htp.ex.dao.NewsDAOException;
 import by.htp.ex.service.INewsService;
 import by.htp.ex.service.ServiceException;
 
-public class NewsServiceImpl implements INewsService{
+public class NewsServiceImpl implements INewsService {
 
 	private final INewsDAO newsDAO = DaoProvider.getInstance().getNewsDAO();
-	
-	@Override
-	public void save() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	public void find() {
-		// TODO Auto-generated method stub
-		
-	}
+	public List<News> getActiveNewsByLocalSortedByDate(String local) throws ServiceException {
+		List<News> news = null;
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<News> latestList(int count) throws ServiceException {
-		
 		try {
-			return newsDAO.getLatestsList(5);
-		} catch (NewsDAOException | ParseException e) {
-			throw new ServiceException(e);
+			news = newsDAO.getList(local);
+			if (news != null) {
+				news = news.stream().filter(News::isStatus).sorted(Comparator.comparing(News::getNewsDate))
+						.collect(Collectors.toList());
+			}
+		} catch (NewsDAOException e) {
+			throw new ServiceException("Can't get ative news by local sorted by date", e);
 		}
-	}
+		return news;
 
-	@Override
-	public List<News> list() throws ServiceException {
-		try {
-			return newsDAO.getList();
-		} catch (NewsDAOException | ParseException e) {
-			throw new ServiceException(e);
-		}
-	}
-
-	@Override
-	public News findById(int id) throws ServiceException {
-		try {
-			return newsDAO.fetchById(id);
-		} catch (NewsDAOException | ParseException e) {
-			throw new ServiceException(e);
-		}
 	}
 
 }

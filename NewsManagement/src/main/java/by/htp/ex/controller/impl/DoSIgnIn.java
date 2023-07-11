@@ -28,8 +28,8 @@ public class DoSIgnIn implements Command {
 		try {
 			user = service.signIn(login, password);
 			request.getSession().setAttribute(ParamName.USER, user);
-			request.getSession().setAttribute(ParamName.PRESENTATION, ParamName.NEWS_LIST);
-			response.sendRedirect(LinkName.COMMAND_GO_TO_NEW_LIST);
+			request.getSession().setAttribute(ParamName.MENU_PRESENTATION, ParamName.NEWS_LIST);
+			response.sendRedirect(LinkName.COMMAND_GO_TO_BASE_PAGE);
 		} catch (ServiceException e) {
 			throw new ServletException(e);
 		} catch (ServiceUserExeption e) {

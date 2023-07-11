@@ -14,27 +14,26 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class GoToBasePage implements Command{
-	
-	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
+public class GoToBasePage implements Command {
 
+	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute(ParamName.GO_TO_BACK, LinkName.COMMAND_GO_TO_BASE_PAGE);
-		
-		List<News> latestNews;
-		try {
-			latestNews = newsService.latestList(5);
-			request.setAttribute("news", latestNews);
-			//request.setAttribute("news", null);
-
-			request.getRequestDispatcher("WEB-INF/pages/layouts/baseLayout.jsp").forward(request, response);
-		} catch (ServiceException e) {
-			// loggin - error
-			e.printStackTrace();
+		String local = (String) request.getSession().getAttribute(ParamName.LOCAL);
+		if (local == null) {
+			local = "en";
+			request.getSession().setAttribute(ParamName.LOCAL, local);
 		}
-		
-		
+
+		try {
+			List<News> newsList = newsService.getActiveNewsByLocalSortedByDate(local);
+			request.setAttribute(ParamName.NEWS, newsList);
+			request.getRequestDispatcher(LinkName.BASE_LAYOUT_JSP).forward(request, response);
+		} catch (ServiceException e) {
+			throw new ServletException(e);
+		}
+
 	}
 
 }

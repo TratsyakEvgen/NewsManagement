@@ -18,13 +18,19 @@
 
 
 
-<nav class="navbar bg-dark navbar-expand-lg " data-bs-theme="dark">
+<header class="navbar bg-dark sticky-top navbar-expand-md " data-bs-theme="dark">
 	<div class="container-fluid">
 		
-		<a class="navbar-brand mb-2" href="#">${news_management}</a>
+		<a class="navbar-brand mb-2">${news_management}</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false">
+			<span class="dropdown-toggle"></span>
+		</button>
+		
+		<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+			data-bs-target="#sidebarMenu"
+			aria-controls="sidebarMenu" aria-expanded="false">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		
@@ -62,7 +68,7 @@
 
 		</div>
 	</div>
-</nav>
+</header>
 
 
 
