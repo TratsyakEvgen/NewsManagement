@@ -1,17 +1,13 @@
 package by.htp.ex.dao;
 
-import java.text.ParseException;
-import java.util.List;
+import java.util.Map;
 
 import by.htp.ex.bean.News;
 
 
 
 public interface INewsDAO {
-	List<News> getLatestsList(int count) throws NewsDAOException, ParseException;
-	News fetchById(int id) throws NewsDAOException, ParseException;
-	int addNews(News news) throws NewsDAOException;
-	void updateNews(News news) throws NewsDAOException;
-	void deleteNewses(String[] idNewses)throws NewsDAOException;
-	List<News> getList(String local) throws NewsDAOException;
+	Map<Integer, News> getListNewsByLocal(String local) throws NewsDAOException;
+
+	News findNewsByIdAndLocal(String id, String local) throws NewsDAOException;
 }

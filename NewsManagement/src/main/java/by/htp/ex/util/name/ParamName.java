@@ -11,10 +11,10 @@ public class ParamName {
 	public static final String REPEAT_PASSWORD = "repeat_password";
 	public static final String ROLE = "role";
 	public static final String MENU_PRESENTATION = "menu_presentation";
-	public static final String BODY_PRESENTATION = "body_presentation";
+	public static final String MAIN_PRESENTATION = "main_presentation";
 	public static final String ERROR = "error";
-	public static final String NEWS_LIST = "newsList";
-	public static final String VIEW_NEWS = "viewList";
+	public static final String NEWS_LIST = "news_list";
+	public static final String VIEW_NEWS = "view_news";
 	public static final String ID = "id";
 	public static final String NAME = "name";
 	public static final String SURNAME = "surname";

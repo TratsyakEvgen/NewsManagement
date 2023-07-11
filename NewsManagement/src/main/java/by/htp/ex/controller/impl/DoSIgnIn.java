@@ -24,9 +24,8 @@ public class DoSIgnIn implements Command {
 		String login = request.getParameter(ParamName.LOGIN);
 		String password = request.getParameter(ParamName.PASSWORD);
 
-		User user;
 		try {
-			user = service.signIn(login, password);
+			User user = service.signIn(login, password);
 			request.getSession().setAttribute(ParamName.USER, user);
 			request.getSession().setAttribute(ParamName.MENU_PRESENTATION, ParamName.NEWS_LIST);
 			response.sendRedirect(LinkName.COMMAND_GO_TO_BASE_PAGE);
