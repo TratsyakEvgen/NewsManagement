@@ -9,11 +9,11 @@ public interface INewsService {
 
 	List<News> getNewsList(String local) throws ServiceException, ServiceUserExeption;
 
-	List<News> getListNewsSortedByDate(Map<Integer, News> newsMap);
+	List<News> convertInListActiveNewsSortedByDate(Map<Integer, News> newsMap);
 
-	void isContainsActiveNews(int id, Map<Integer, News> newsMap) throws ServiceUserExeption;
+	void checkContainsActiveNewsElseThrow(int id, Map<Integer, News> newsMap) throws ServiceUserExeption;
 
-	Map<Integer, News> getMapActiveNewsByLocal(String local) throws ServiceException;
+	Map<Integer, News> getMapNewsByLocal(String local) throws ServiceException, ServiceUserExeption;
 
 
 

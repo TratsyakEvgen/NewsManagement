@@ -11,7 +11,7 @@
 <fmt:message bundle="${loc}" key="local.opps" var="opps" />
 <fmt:message bundle="${loc}" key="local.page.not.found" var="page_not_found" />
 <fmt:message bundle="${loc}" key="local.internal.server.error" var="server_error" />
-<fmt:message bundle="${loc}" key="local.the.page.you’re.looking.for.doesn’t.exist" var="page_exist" />
+<fmt:message bundle="${loc}" key="local.the.page.youre.looking.for.doesnt.exist" var="page_exist" />
 <fmt:message bundle="${loc}" key="local.we.are.already.working.on.the.problem" var="working_on_problem" />
 
 <!DOCTYPE html>

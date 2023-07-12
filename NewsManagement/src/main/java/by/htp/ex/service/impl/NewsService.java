@@ -15,31 +15,32 @@ import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceUserExeption;
 import by.htp.ex.util.name.LocalName;
 
-public class NewsServiceImpl implements INewsService {
+public class NewsService implements INewsService {
 
 	private final INewsDAO newsDAO = DaoProvider.getInstance().getNewsDAO();
 	
 	@Override
-	public Map<Integer, News> getMapActiveNewsByLocal(String local) throws ServiceException {
+	public Map<Integer, News> getMapNewsByLocal(String local) throws ServiceException, ServiceUserExeption {
+		Map<Integer, News> newsMap;
 		try {
-			return newsDAO.getListNewsByLocal(local);
+			newsMap = newsDAO.getListNewsByLocal(local);
+			if (newsMap.isEmpty()) {
+				throw new ServiceUserExeption(LocalName.NEWS_NOT_FOUND);
+			}			
 		} catch (NewsDAOException e) {
 			throw new ServiceException("Can't get map ative news by local", e);
 		}
+		return newsMap;
 	}
 
 	@Override
 	public List<News> getNewsList(String local) throws ServiceException, ServiceUserExeption{
-		Map<Integer, News> newsMap = getMapActiveNewsByLocal(local);
-		if (newsMap.isEmpty()) {
-			throw new ServiceUserExeption(LocalName.NEWS_NOT_FOUND);
-		}
-		return getListNewsSortedByDate(newsMap);
-		
+		Map<Integer, News> newsMap = getMapNewsByLocal(local);		
+		return convertInListActiveNewsSortedByDate(newsMap);		
 	}
 
 	@Override
-	public List<News> getListNewsSortedByDate(Map<Integer, News> newsMap){
+	public List<News> convertInListActiveNewsSortedByDate(Map<Integer, News> newsMap){
 		List<News> newsList = new ArrayList<>(newsMap.values());
 		newsList = newsList.stream().filter(News::isStatus).sorted(Comparator.comparing(News::getNewsDate))
 				.collect(Collectors.toList());
@@ -48,7 +49,7 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	@Override
-	public void isContainsActiveNews(int id, Map<Integer, News> newsMap) throws ServiceUserExeption {
+	public void checkContainsActiveNewsElseThrow(int id, Map<Integer, News> newsMap) throws ServiceUserExeption {
 		if (!newsMap.containsKey(id)) {
 			throw new ServiceUserExeption(LocalName.NEWS_NOT_FOUND);
 		}

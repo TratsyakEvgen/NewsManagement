@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToViewNews implements Command {
-	
+
 	private final INewsService service = ServiceProvider.getInstance().getNewsService();
 
 	@Override
@@ -25,24 +25,26 @@ public class GoToViewNews implements Command {
 		request.getSession().setAttribute(ParamName.GO_TO_BACK,
 				LinkName.COMMAND_GO_TO_VIEW_NEWS + request.getParameter(ParamName.ID));
 		String local = (String) request.getSession().getAttribute(ParamName.LOCAL);
-		int id = Integer.parseInt(request.getParameter(ParamName.ID)) ;
-		
-		
+		int id = Integer.parseInt(request.getParameter(ParamName.ID));
+
+		Map<Integer, News> newsMap = null;
 		try {
-			Map<Integer, News> newsMap = service.getMapActiveNewsByLocal(local);
-			service.isContainsActiveNews(id, newsMap);
+			newsMap = service.getMapNewsByLocal(local);
+			List<News> newsList = service.convertInListActiveNewsSortedByDate(newsMap);
+			request.setAttribute(ParamName.NEWS_LIST, newsList);
+			request.getSession().setAttribute(ParamName.MENU_PRESENTATION, ParamName.NEWS_LIST);
+			service.checkContainsActiveNewsElseThrow(id, newsMap);
 			request.setAttribute(ParamName.NEWS, newsMap.get(id));
 			request.getSession().setAttribute(ParamName.MAIN_PRESENTATION, ParamName.VIEW_NEWS);
-			List<News> newsList = service.getListNewsSortedByDate(newsMap);
-			request.getSession().setAttribute(ParamName.MENU_PRESENTATION, ParamName.NEWS_LIST);
-			request.setAttribute(ParamName.NEWS_LIST, newsList);
-			request.getRequestDispatcher(LinkName.BASE_LAYOUT_JSP).forward(request, response);
+			request.getRequestDispatcher(LinkName.BASE_LAYOUT_JSP).forward(request, response);			
 		} catch (ServiceException e) {
 			throw new ServletException(e);
 		} catch (ServiceUserExeption e) {
 			request.setAttribute(ParamName.ERROR, e.getMessage());
+			request.getSession().setAttribute(ParamName.MAIN_PRESENTATION, ParamName.EMPTINESS);
 			request.getRequestDispatcher(LinkName.BASE_LAYOUT_JSP).forward(request, response);
 		}
+		
 	}
 
 }

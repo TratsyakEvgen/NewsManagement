@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
 <meta charset="utf-8">
@@ -13,10 +13,10 @@
 </head>
 
 
-<body>
+<body class="d-flex flex-column h-100">
 	<c:import url="/WEB-INF/pages/tiles/header.jsp" />
 
-	<div class="container-fluid">
+	<div class="container-fluid flex-shrink-0">
 		<div class="row">
 			<div class="sidebar border border-right col-md-4 col-lg-3 p-0">
 				<div class="offcanvas-md offcanvas-end" tabindex="-1"
@@ -35,10 +35,18 @@
 			</div>
 
 			<main class="col-md-8 ms-sm-auto col-lg-9 px-md-4">
-				<c:import url="/WEB-INF/pages/tiles/main.jsp" />
+				<div class="container">
+					<c:import url="/WEB-INF/pages/tiles/main.jsp" />
+				</div>
 			</main>
 		</div>
 	</div>
+	
+	<footer class="footer mt-auto py-1 bg-dark text-center text-white">        
+        <div>2023 Copyright:
+          <a class="text-white" href="https://Sharaga.com/">Sharaga.com</a>
+        </div>
+      </footer>
 
 	<script src="script/popper.min.js"></script>
 	<script src="script/bootstrap.js"></script>

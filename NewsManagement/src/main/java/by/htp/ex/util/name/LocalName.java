@@ -14,4 +14,5 @@ public class LocalName {
 	public static final String LOGIN_EXISTS = "local.login.exists";
 	public static final String NEWS_NOT_FOUND = "local.news.not.found";
 	public static final String NEWS_DELETED = "local.news.deleted";
+	public static final String EN = "en";
 }

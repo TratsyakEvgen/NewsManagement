@@ -15,6 +15,7 @@ public class ParamName {
 	public static final String ERROR = "error";
 	public static final String NEWS_LIST = "news_list";
 	public static final String VIEW_NEWS = "view_news";
+	public static final String START_PAGE = "start_page";
 	public static final String ID = "id";
 	public static final String NAME = "name";
 	public static final String SURNAME = "surname";
@@ -23,5 +24,7 @@ public class ParamName {
 	public static final String USER = "user";
 	public static final String ENCODING = "encoding";
 	public static final String NEWS = "news";
+	public static final String EMPTINESS = "emptiness";
+	
 
 }

@@ -21,7 +21,7 @@
 <header class="navbar bg-dark sticky-top navbar-expand-md " data-bs-theme="dark">
 	<div class="container-fluid">
 		
-		<a class="navbar-brand mb-2">${news_management}</a>
+		<a class="navbar-brand mb-2" href="controller?command=go_to_base_page">${news_management}</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false">
