@@ -32,13 +32,11 @@ public class UserService implements IUserService {
 			userDataValidation.isAuthData(login, password);
 		} catch (ValidationException e) {
 			throw new ServiceUserExeption(e.getMessage());
-		}
-		
+		}		
 
 		User user = null;
 
 		try {
-
 			if ((user = userDAO.findByLogin(login)) == null) {
 				throw new ServiceUserExeption(LocalName.LOGIN_NOT_FOUND);
 			}
@@ -55,25 +53,24 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public boolean registration(User user, String repeatPassword) throws ServiceUserExeption, ServiceException {
+	public boolean registration(User user, String login, String password, String repeatPassword) throws ServiceUserExeption, ServiceException {
 		try {
-			userDataValidation.isRegistrationData(user, repeatPassword);
+			userDataValidation.isRegistrationData(user, login, password, repeatPassword);
 		} catch (ValidationException e) {
 			throw new ServiceUserExeption(e.getMessage());
 		}
 		
 		user.setRole(ParamName.USER);
 		user.setRegisterDate(Date.valueOf(LocalDate.now()));
-		user.setPassword(getHashPassword(user.getPassword()));
 		
 		ReentrantLock reentrantLock = ReentrantLockSingleton.getInstance();
 	
 		try {
 			reentrantLock.lock();
-			if (userDAO.isExistLogin(user.getLogin())){
+			if (userDAO.isExistLogin(login)){
 				throw new ServiceUserExeption(LocalName.LOGIN_EXISTS);
 			}
-			userDAO.createUser(user);
+			userDAO.createUser(user, login, getHashPassword(password));
 		} catch (DaoException e) {
 			throw new ServiceException("Registration failed", e);
 		} finally {

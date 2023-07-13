@@ -14,8 +14,6 @@ public class User implements Serializable {
 	private String surname;
 	private String email;
 	private Date registerDate;
-	private String login;
-	private String password;
 
 	public User() {
 	}
@@ -68,25 +66,9 @@ public class User implements Serializable {
 		this.registerDate = registerDate;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, login, name, password, registerDate, role, surname);
+		return Objects.hash(email, id, name, registerDate, role, surname);
 	}
 
 	@Override
@@ -98,8 +80,7 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(email, other.email) && id == other.id && Objects.equals(login, other.login)
-				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
+		return Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
 				&& Objects.equals(registerDate, other.registerDate) && Objects.equals(role, other.role)
 				&& Objects.equals(surname, other.surname);
 	}
@@ -107,9 +88,10 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", role=" + role + ", name=" + name + ", surname=" + surname + ", email=" + email
-				+ ", registerDate=" + registerDate + ", login=" + login + ", password=" + password + "]";
+				+ ", registerDate=" + registerDate + "]";
 	}
 
+	
 	
 
 }

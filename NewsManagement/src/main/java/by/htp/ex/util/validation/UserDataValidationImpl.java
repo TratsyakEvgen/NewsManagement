@@ -55,10 +55,10 @@ public class UserDataValidationImpl implements UserDataValidation {
 	}	
 	
 	@Override
-	public void isRegistrationData(User user, String repeatPassword) throws ValidationException {
-		isPassword(user.getPassword());
-		checkMatchPasswords(user.getPassword(), repeatPassword);
-		isLogin(user.getLogin());
+	public void isRegistrationData(User user, String login, String password, String repeatPassword) throws ValidationException {
+		isPassword(password);
+		checkMatchPasswords(password, repeatPassword);
+		isLogin(login);
 		isEmail(user.getEmail());
 		isName(user.getName());
 		isSurname(user.getSurname());

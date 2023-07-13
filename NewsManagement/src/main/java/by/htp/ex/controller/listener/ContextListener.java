@@ -2,6 +2,7 @@ package by.htp.ex.controller.listener;
 
 import by.htp.ex.dao.connection.pool.ConnectionPool;
 import by.htp.ex.dao.connection.pool.ConnectionPoolException;
+import by.htp.ex.util.logger.ConsoleLogger;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 
@@ -14,7 +15,7 @@ public class ContextListener implements ServletContextListener{
 		try {
 			connectionPool.initPoolData();
 		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
+			ConsoleLogger.getInstance().warn(e);
 		}
 	}
 
@@ -23,7 +24,7 @@ public class ContextListener implements ServletContextListener{
 		try {
 			connectionPool.dispose();
 		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
+			ConsoleLogger.getInstance().warn(e);
 		}
 	}
 

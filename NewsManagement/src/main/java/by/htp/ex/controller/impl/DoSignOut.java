@@ -13,7 +13,7 @@ public class DoSignOut implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			request.getSession().setAttribute(ParamName.USER, null);
+			request.getSession().removeAttribute(ParamName.USER);
 			response.sendRedirect(LinkName.INDEX_JSP);
 		
 	}

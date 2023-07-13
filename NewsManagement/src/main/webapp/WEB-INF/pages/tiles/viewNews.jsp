@@ -41,7 +41,7 @@
 
 
 <c:if test="${!requestScope.news.images.isEmpty()}">
-	<div class="row justify-content-center">
+	<div class="row justify-content-center border-bottom">
 		<div class="col-md-10 col-lg-8">
 			<div id="carouselExample" class="carousel slide carousel-fade">
 				<div class="carousel-inner">

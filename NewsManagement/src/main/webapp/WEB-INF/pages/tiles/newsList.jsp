@@ -9,9 +9,9 @@
 	<c:forEach var="news" items="${requestScope.news_list}">
 		<li class="nav-item">
 			<div>
-				<a href=
+				<a 
 				<c:if test="${sessionScope.user.role == 'user' or sessionScope.user.role == 'admin'}">
-					<c:out value="controller?command=go_to_view_news&id=${news.id}" />
+					<c:out value="href=controller?command=go_to_view_news&id=${news.id}" />
 				</c:if>>
 					<c:out value="${news.title}" /></a>
 

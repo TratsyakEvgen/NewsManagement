@@ -49,19 +49,23 @@
 					</ul>
 				</li>
 			</ul>
+			
+			
+			<c:set var= "user" value="${sessionScope.user}"></c:set>
 
-
-			<c:if test="${sessionScope.user == null}">
+			<c:if test="${user == null}">
 				<a href="controller?command=go_to_authentication"
 					class="btn btn-dark btn-outline-light mb-2 me-2">${sign_in}</a>
 			</c:if>
 
-			<c:if test="${sessionScope.user != null}">
+			<c:if test="${user != null}">
 				<form class="d-flex mb-2 me-2" role="search">
 					<input class="form-control me-2" type="search" placeholder="${find}">
 					<button class="btn btn-dark btn-outline-light"
 						type="submit">${find}</button>
 				</form>
+				<a href="controller?command=do_sign_out"
+					class="btn btn-dark btn-outline-light mb-2 me-2">${user.surname} ${user.name}</a>
 				<a href="controller?command=do_sign_out"
 					class="btn btn-dark btn-outline-light mb-2 me-2">${sign_out}</a>
 			</c:if>

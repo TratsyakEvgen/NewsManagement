@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
 import java.sql.Statement;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -107,19 +106,17 @@ public class UserDAO implements IUserDAO {
 	
 	private static final String QUERY_INSERT_USERS = "INSERT INTO users (users.login, users.password, users.roles_id) VALUE (?,?,(SELECT roles.id FROM roles WHERE roles.role=?))";
 	private static final String QUERY_INSERT_USER_DITAILES = "INSERT INTO user_detailes VALUE (?,?,?,?,?)";	
-	private static final String DB_SAVE_POINT = "Savepoint";	
 
 	@Override
-	public void createUser(User user) throws DaoException {
+	public void createUser(User user, String login, String password) throws DaoException {
 		try (Connection connection = connectionPool.takeConnection()){
 			connection.setAutoCommit(false);
-			Savepoint savepoint = connection.setSavepoint(DB_SAVE_POINT);
 			
 			int id = 0;
 			try (PreparedStatement statment = connection.prepareStatement(QUERY_INSERT_USERS, Statement.RETURN_GENERATED_KEYS)){
 				
-				statment.setString(1, user.getLogin());
-				statment.setString(2, user.getPassword());
+				statment.setString(1, login);
+				statment.setString(2, password);
 				statment.setString(3, user.getRole());
 				statment.executeUpdate();					
 				
@@ -129,8 +126,7 @@ public class UserDAO implements IUserDAO {
 					}
 				}
 			} catch(SQLException e){
-				connection.rollback(savepoint);	
-				connection.releaseSavepoint(savepoint);
+				connection.rollback();	
 				connection.setAutoCommit(true);
 				throw new DaoException("Error in query INSERT users.", e);
 			}
@@ -146,8 +142,7 @@ public class UserDAO implements IUserDAO {
 				statmentDetailes.executeUpdate();
 				connection.commit();
 			} catch(SQLException e){
-				connection.rollback(savepoint);
-				connection.releaseSavepoint(savepoint);
+				connection.rollback();
 				connection.setAutoCommit(true);
 				throw new DaoException("Error in query INSERT user_ditails.", e);
 			}

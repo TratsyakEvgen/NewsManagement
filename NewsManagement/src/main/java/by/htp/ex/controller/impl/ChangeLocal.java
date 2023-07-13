@@ -6,13 +6,15 @@ import by.htp.ex.util.name.ParamName;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class ChangeLocal implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute(ParamName.LOCAL, request.getParameter(ParamName.LOCAL));
-		response.sendRedirect((String) request.getSession().getAttribute(ParamName.GO_TO_BACK));
+		HttpSession session = request.getSession();
+		session.setAttribute(ParamName.LOCAL, request.getParameter(ParamName.LOCAL));
+		response.sendRedirect((String) session.getAttribute(ParamName.GO_TO_BACK));
 
 	}
 

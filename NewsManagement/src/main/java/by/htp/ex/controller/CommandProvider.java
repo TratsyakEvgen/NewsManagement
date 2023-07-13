@@ -7,6 +7,7 @@ import by.htp.ex.controller.impl.GoToAuthentication;
 import by.htp.ex.controller.impl.DoSIgnIn;
 import by.htp.ex.controller.impl.DoSignOut;
 import by.htp.ex.controller.impl.GoToBasePage;
+import by.htp.ex.controller.impl.GoToErrorPage;
 import by.htp.ex.controller.impl.GoToRegistration;
 import by.htp.ex.controller.impl.GoToViewNews;
 import by.htp.ex.controller.impl.ChangeLocal;
@@ -26,6 +27,7 @@ public final class CommandProvider {
 		commands.put(CommandName.GO_TO_VIEW_NEWS, new GoToViewNews());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
 		commands.put(CommandName.GO_TO_AUTHENTICATION, new GoToAuthentication());
+		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPage());
 	}
 	
 	public final static CommandProvider getInstance() {
@@ -34,7 +36,12 @@ public final class CommandProvider {
 	
 	
 	public final Command getCommand(String name) {
-		CommandName  commandName = CommandName.valueOf(name.toUpperCase());
+		CommandName commandName;
+		try {
+			commandName = CommandName.valueOf(name.toUpperCase());
+		} catch (IllegalArgumentException | NullPointerException e) {
+			commandName = CommandName.GO_TO_ERROR_PAGE;
+		}		
 		Command command = commands.get(commandName);
 		return command;
 	}

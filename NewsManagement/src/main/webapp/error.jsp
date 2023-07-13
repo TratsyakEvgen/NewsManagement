@@ -3,16 +3,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<c:set var="status" value="${pageContext.errorData.statusCode}" />
+
+<c:set var="status" value="${requestScope.error}" />
+<c:if test="${status == null}">
+	<c:set var="status" value="${pageContext.errorData.statusCode}" />
+</c:if>
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.back" var="back" />
 <fmt:message bundle="${loc}" key="local.page.error" var="page_error" />
 <fmt:message bundle="${loc}" key="local.opps" var="opps" />
-<fmt:message bundle="${loc}" key="local.page.not.found" var="page_not_found" />
-<fmt:message bundle="${loc}" key="local.internal.server.error" var="server_error" />
-<fmt:message bundle="${loc}" key="local.the.page.youre.looking.for.doesnt.exist" var="page_exist" />
-<fmt:message bundle="${loc}" key="local.we.are.already.working.on.the.problem" var="working_on_problem" />
+<fmt:message bundle="${loc}" key="local.page.not.found"
+	var="page_not_found" />
+<fmt:message bundle="${loc}" key="local.internal.server.error"
+	var="server_error" />
+<fmt:message bundle="${loc}"
+	key="local.the.page.youre.looking.for.doesnt.exist" var="page_exist" />
+<fmt:message bundle="${loc}"
+	key="local.we.are.already.working.on.the.problem"
+	var="working_on_problem" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,14 +43,14 @@
 			</h1>
 			<p class="fs-3">
 				<span class="text-danger">${opps}</span>
-				<c:if test="${status == '404'}">${page_not_found}<p
+				<c:if test="${status != '500'}">${page_not_found}<p
 						class="lead">${page_exist}</p>
 				</c:if>
-				<c:if test="${status != '404'}">${server_error}<p
+				<c:if test="${status == '500'}">${server_error}<p
 						class="lead">${working_on_problem}</p>
 				</c:if>
 			</p>
-			<a href="${sessionScope.go_to_back}" class="btn btn-dark">${back}</a>
+			<a href="controller?command=go_to_base_page" class="btn btn-dark">${back}</a>
 		</div>
 	</div>
 </body>
