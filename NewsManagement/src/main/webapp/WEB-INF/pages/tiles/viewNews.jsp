@@ -43,7 +43,7 @@
 <c:if test="${!requestScope.news.images.isEmpty()}">
 	<div class="row justify-content-center border-bottom">
 		<div class="col-md-10 col-lg-8">
-			<div id="carouselExample" class="carousel slide carousel-fade">
+			<div id="carousel" class="carousel slide carousel-fade">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<img src="${requestScope.news.images.get(0).link}"
@@ -61,14 +61,12 @@
 				</div>
 
 				<button class="carousel-control-prev" type="button"
-					data-bs-target="#carouselExample" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">previous</span>
+					data-bs-target="#carousel" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
 				</button>
 				<button class="carousel-control-next" type="button"
-					data-bs-target="#carouselExample" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">next</span>
+					data-bs-target="#carousel" data-bs-slide="next">
+					<span class="carousel-control-next-icon"></span>
 				</button>
 			</div>
 		</div>

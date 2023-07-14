@@ -6,6 +6,7 @@ import java.util.Map;
 import by.htp.ex.controller.impl.GoToAuthentication;
 import by.htp.ex.controller.impl.DoSIgnIn;
 import by.htp.ex.controller.impl.DoSignOut;
+import by.htp.ex.controller.impl.GoToAccount;
 import by.htp.ex.controller.impl.GoToBasePage;
 import by.htp.ex.controller.impl.GoToErrorPage;
 import by.htp.ex.controller.impl.GoToRegistration;
@@ -28,6 +29,7 @@ public final class CommandProvider {
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
 		commands.put(CommandName.GO_TO_AUTHENTICATION, new GoToAuthentication());
 		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPage());
+		commands.put(CommandName.GO_TO_ACCOUNT, new GoToAccount());
 	}
 	
 	public final static CommandProvider getInstance() {

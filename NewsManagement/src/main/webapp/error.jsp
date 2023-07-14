@@ -43,10 +43,10 @@
 			</h1>
 			<p class="fs-3">
 				<span class="text-danger">${opps}</span>
-				<c:if test="${status != '500'}">${page_not_found}<p
+				<c:if test="${status == 404}">${page_not_found}<p
 						class="lead">${page_exist}</p>
 				</c:if>
-				<c:if test="${status == '500'}">${server_error}<p
+				<c:if test="${status >= 500}">${server_error}<p
 						class="lead">${working_on_problem}</p>
 				</c:if>
 			</p>

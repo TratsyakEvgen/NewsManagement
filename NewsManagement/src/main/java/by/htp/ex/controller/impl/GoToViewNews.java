@@ -55,7 +55,6 @@ public class GoToViewNews implements Command {
 			Map<String, Object> mapAttrError = new HashMap<>();
 			mapAttrError.put(ParamName.ERROR, e.getMessage());
 			session.setAttribute(ParamName.MAP_ATTR_ERROR, mapAttrError);
-			request.setAttribute(ParamName.MAIN_PRESENTATION, ParamName.EMPTINESS);
 			response.sendRedirect(LinkName.MESSAGE_ERROR);
 		}
 

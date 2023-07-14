@@ -12,3 +12,7 @@
 		<c:import url="/WEB-INF/pages/tiles/aboutUs.jsp" />
 	</c:if>
 </c:if>
+
+<c:if test="${requestScope.main_presentation == 'view_account'}">
+	<c:import url="/WEB-INF/pages/tiles/account.jsp" />
+</c:if>

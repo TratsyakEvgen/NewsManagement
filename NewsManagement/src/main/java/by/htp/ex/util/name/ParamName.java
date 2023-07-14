@@ -24,9 +24,9 @@ public class ParamName {
 	public static final String USER = "user";
 	public static final String ENCODING = "encoding";
 	public static final String NEWS = "news";
-	public static final String EMPTINESS = "emptiness";
 	public static final String MAP_ATTR_ERROR = "mapAttrError";
 	public static final String MESSAGE = "message";
+	public static final String VIEW_ACCOUNT = "view_account";
 	
 	
 
