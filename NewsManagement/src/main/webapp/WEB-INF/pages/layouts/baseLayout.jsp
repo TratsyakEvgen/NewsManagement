@@ -5,6 +5,7 @@
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
+<fmt:message bundle="${loc}" key="local.done" var="done" />
 <fmt:message bundle="${loc}" key="local.page.error" var="error" />
 <fmt:message bundle="${loc}" key="local.news.management"
 	var="news_management" />
@@ -23,6 +24,19 @@
 
 <body class="d-flex flex-column h-100">
 	<c:import url="/WEB-INF/pages/tiles/header.jsp" />
+
+	<c:if test="${param.message == 'done'}">
+		<div class="toast-container position-fixed top-0 end-0 p-5">
+			<div class="toast fade show" role="alert">
+				<div class="toast-header">
+					<svg class="bd-placeholder-img rounded me-2" width="20" height="20">
+					<rect width="100%" height="100%" fill="green"></rect></svg>
+					<strong class="me-auto">${done}</strong>
+					<button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+				</div>
+			</div>
+		</div>
+	</c:if>
 
 	<c:if test="${requestScope.error != null}">
 		<fmt:message bundle="${loc}" key="${requestScope.error}"
@@ -64,15 +78,17 @@
 			</main>
 		</div>
 
-	</div>
-	<footer class="fixed-bottom bg-dark text-center text-white">
-		2023 Copyright: <a class="text-decoration-none text-reset"
-			href="https://Sharaga.com/">Sharaga.com</a>
-	</footer>
+
+
+		<footer class="fixed-bottom bg-dark text-center text-white">
+			2023 Copyright: <a class="text-decoration-none text-reset"
+				href="https://Sharaga.com/">Sharaga.com</a>
+		</footer>
 
 
 
-	<script src="script/popper.min.js"></script>
-	<script src="script/bootstrap.js"></script>
+
+		<script src="script/popper.min.js"></script>
+		<script src="script/bootstrap.js"></script>
 </body>
 </html>

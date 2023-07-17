@@ -49,6 +49,8 @@ public class DoRegistration implements Command {
 			Map<String, Object> mapAttrError = new HashMap<>();
 			mapAttrError.put(ParamName.ERROR, e.getMessage());
 			mapAttrError.put(ParamName.USER, user);
+			mapAttrError.put(ParamName.LOGIN, login);
+			mapAttrError.put(ParamName.PASSWORD, password);
 			mapAttrError.put(ParamName.REPEAT_PASSWORD, repeatPassword);
 			session.setAttribute(ParamName.MAP_ATTR_ERROR, mapAttrError);
 			response.sendRedirect(LinkName.MESSAGE_ERROR);

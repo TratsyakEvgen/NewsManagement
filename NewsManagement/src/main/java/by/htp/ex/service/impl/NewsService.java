@@ -28,7 +28,7 @@ public class NewsService implements INewsService {
 				throw new ServiceUserExeption(LocalName.NEWS_NOT_FOUND);
 			}			
 		} catch (NewsDAOException e) {
-			throw new ServiceException("Can't get map ative news by local", e);
+			throw new ServiceException("Can't get map news by local", e);
 		}
 		return newsMap;
 	}

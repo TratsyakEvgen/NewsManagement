@@ -70,13 +70,13 @@
 					<label class="form-label">${login}</label>
 					<div class="row p-1">
 						<input type="text" name="login" class="form-control"
-							placeholder="${enter_login}" value="${requestScope.user.login}">
+							placeholder="${enter_login}" value="${requestScope.login}">
 					</div>
 
 					<label class="form-label">${password}</label>
 					<div class="row p-1">
 						<input type="password" name="password" class="form-control"
-							placeholder="${enter_password}" value="${requestScope.user.password}">
+							placeholder="${enter_password}" value="${requestScope.password}">
 					</div>
 
 					<label class="form-label">${repeat_password}</label>

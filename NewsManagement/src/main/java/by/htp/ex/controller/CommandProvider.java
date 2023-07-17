@@ -6,12 +6,15 @@ import java.util.Map;
 import by.htp.ex.controller.impl.GoToAuthentication;
 import by.htp.ex.controller.impl.DoSIgnIn;
 import by.htp.ex.controller.impl.DoSignOut;
+import by.htp.ex.controller.impl.DoUpdateAccount;
+import by.htp.ex.controller.impl.DoUpdatePassword;
 import by.htp.ex.controller.impl.GoToAccount;
 import by.htp.ex.controller.impl.GoToBasePage;
 import by.htp.ex.controller.impl.GoToErrorPage;
 import by.htp.ex.controller.impl.GoToRegistration;
 import by.htp.ex.controller.impl.GoToViewNews;
 import by.htp.ex.controller.impl.ChangeLocal;
+import by.htp.ex.controller.impl.DoDeleteAccount;
 import by.htp.ex.controller.impl.DoRegistration;
 
 public final class CommandProvider {
@@ -30,6 +33,9 @@ public final class CommandProvider {
 		commands.put(CommandName.GO_TO_AUTHENTICATION, new GoToAuthentication());
 		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPage());
 		commands.put(CommandName.GO_TO_ACCOUNT, new GoToAccount());
+		commands.put(CommandName.DO_UPDATE_ACCOUNT, new DoUpdateAccount());
+		commands.put(CommandName.DO_UPDATE_PASSWORD, new DoUpdatePassword());
+		commands.put(CommandName.DO_DELETE_ACCOUNT, new DoDeleteAccount());
 	}
 	
 	public final static CommandProvider getInstance() {

@@ -9,6 +9,7 @@ public class ParamName {
 	public static final String LOGIN = "login";
 	public static final String PASSWORD = "password";
 	public static final String REPEAT_PASSWORD = "repeat_password";
+	public static final String NEW_PASSWORD = "new_password";
 	public static final String ROLE = "role";
 	public static final String MENU_PRESENTATION = "menu_presentation";
 	public static final String MAIN_PRESENTATION = "main_presentation";
@@ -27,7 +28,8 @@ public class ParamName {
 	public static final String MAP_ATTR_ERROR = "mapAttrError";
 	public static final String MESSAGE = "message";
 	public static final String VIEW_ACCOUNT = "view_account";
-	
-	
-
+	public static final String MARKER = "marker";
+	public static final String UPDATE_INFO = "updateInfo";
+	public static final String UPDATE_PASSWORD = "updatePassword";
+	public static final String DELETE = "delete";
 }

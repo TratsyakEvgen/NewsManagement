@@ -19,6 +19,8 @@ public interface UserDataValidation {
 
 	void isRegistrationData(User user, String login, String password, String repeatPassword) throws ValidationException;
 
+	void isUserData(User user) throws ValidationException;
+
 
 	
 
