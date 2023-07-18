@@ -14,7 +14,7 @@
 	var="news_management" />
 <fmt:message bundle="${loc}" key="local.find" var="find" />
 
-
+<c:set var="user" value="${sessionScope.user}"></c:set>
 
 
 
@@ -22,7 +22,15 @@
 	data-bs-theme="dark">
 	<div class="container-fluid">
 		<div class="mb-2 me-2">
-			<a class="navbar-brand" href="controller?command=go_to_base_page">${news_management}</a>
+			<a class="navbar-brand" type="button" data-bs-toggle="dropdown">${news_management}</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item"
+					href="controller?command=go_to_base_page">Main</a></li>
+				<c:if test="${user.role == 'admin'}">
+					<li><a class="dropdown-item"
+						href="controller?command=go_to_admin_menu">Admin menu</a></li>
+				</c:if>
+			</ul>
 		</div>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarContent">
@@ -48,7 +56,7 @@
 			</div>
 
 
-			<c:set var="user" value="${sessionScope.user}"></c:set>
+
 
 			<c:if test="${user == null}">
 				<a href="controller?command=go_to_authentication"

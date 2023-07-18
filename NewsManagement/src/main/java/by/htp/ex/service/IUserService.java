@@ -1,6 +1,10 @@
 package by.htp.ex.service;
 
+import java.util.List;
+import java.util.Map;
+
 import by.htp.ex.bean.User;
+
 
 public interface IUserService {
 
@@ -15,5 +19,9 @@ public interface IUserService {
 			throws ServiceUserExeption, ServiceException;
 
 	void deleteAccount(int id, String login, String password) throws ServiceUserExeption, ServiceException;
+
+	List<User> getAllUsers() throws ServiceException, ServiceUserExeption;
+
+	void updateRole(Map<String, String[]> params) throws ServiceException, ServiceUserExeption;
 
 }

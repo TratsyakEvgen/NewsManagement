@@ -28,6 +28,16 @@
 	</listener>
 	
 	<filter>
+		<filter-name>Folder</filter-name>
+		<filter-class>by.htp.ex.controller.filter.FolderFilter</filter-class>	
+	</filter>	
+
+	<filter-mapping>
+		<filter-name>Folder</filter-name>
+		<url-pattern>/uploaded-files/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
 		<filter-name>Encoding</filter-name>
 		<filter-class>by.htp.ex.controller.filter.EncodingFilter</filter-class>
 		<init-param>

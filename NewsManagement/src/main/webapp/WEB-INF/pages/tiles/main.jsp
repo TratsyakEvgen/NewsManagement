@@ -16,3 +16,11 @@
 <c:if test="${requestScope.main_presentation == 'view_account'}">
 	<c:import url="/WEB-INF/pages/tiles/account.jsp" />
 </c:if>
+
+<c:if test="${requestScope.main_presentation == 'user_list'}">
+	<c:import url="/WEB-INF/pages/tiles/userList.jsp" />
+</c:if>
+
+<c:if test="${requestScope.main_presentation == 'view_files'}">
+	<c:import url="/WEB-INF/pages/tiles/viewFiles.jsp" />
+</c:if>

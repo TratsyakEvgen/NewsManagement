@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -24,6 +26,40 @@ public class UserDAO implements IUserDAO {
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
 	public UserDAO() {
+	}
+
+	private static final String QUERY_FIND_ALL_USER = "SELECT users.id, roles.role, user_detailes.name,"
+			+ " user_detailes.surname, user_detailes.email, user_detailes.register_date FROM"
+			+ " users JOIN roles ON users.roles_id = roles.id JOIN user_detailes ON users.id = user_detailes.users_id";
+
+	@Override
+	public List<User> getAll() throws DaoException {
+		List<User> users = null;
+		User user = null;
+		try (Connection connection = connectionPool.takeConnection();
+				PreparedStatement statment = connection.prepareStatement(QUERY_FIND_ALL_USER)) {			
+			try (ResultSet resultSet = statment.executeQuery()) {
+				if (resultSet.isBeforeFirst()) {
+					users = new ArrayList<>();
+				}				
+				while (resultSet.next()) {
+					user = new User();
+					user.setId(resultSet.getInt(ParamName.ID));
+					user.setRole(resultSet.getString(ParamName.ROLE));
+					user.setName(resultSet.getString(ParamName.NAME));
+					user.setSurname(resultSet.getString(ParamName.SURNAME));
+					user.setEmail(resultSet.getString(ParamName.EMAIL));
+					user.setRegisterDate(resultSet.getDate(ParamName.REGISTER_DATE));
+					users.add(user);
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new DaoException("SQLException find user by login.", e);
+		} catch (ConnectionPoolException e) {
+			throw new DaoException("Сonnection setup error find user by login.", e);
+		}
+		return users;
 	}
 
 	private static final String QUERY_FIND_USER_BY_LOGIN = "SELECT users.id, roles.role, user_detailes.name,"
@@ -193,7 +229,7 @@ public class UserDAO implements IUserDAO {
 			throw new DaoException("Сonnection setup error update user.", e);
 		}
 	}
-	
+
 	private static final String QUERY_UPDATE_PASSWORD = "UPDATE users SET users.password = ? WHERE users.id = ?";
 
 	@Override
@@ -209,11 +245,11 @@ public class UserDAO implements IUserDAO {
 			throw new DaoException("Сonnection setup error update password.", e);
 		}
 	}
-	
+
 	private static final String QUERY_UPDATE_ROLE = "UPDATE users SET users.roles_id = (SELECT roles.id FROM roles WHERE roles.role= ?) WHERE users.id = ?";
-	
+
 	@Override
-	public void changeRole(Map<Integer,String> roles) throws DaoException {
+	public void changeRole(Map<Integer, String> roles) throws DaoException {
 		try (Connection connection = connectionPool.takeConnection();
 				PreparedStatement statment = connection.prepareStatement(QUERY_UPDATE_ROLE)) {
 			Set<Entry<Integer, String>> setRoles = roles.entrySet();
@@ -229,7 +265,5 @@ public class UserDAO implements IUserDAO {
 			throw new DaoException("Сonnection setup error change role.", e);
 		}
 	}
-	
-	
 
 }

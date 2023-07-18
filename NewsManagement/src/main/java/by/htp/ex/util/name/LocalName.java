@@ -15,6 +15,8 @@ public class LocalName {
 	public static final String MATH_PASSWORDS_VALIDATION = "local.math.passwords.validation";
 	public static final String LOGIN_EXISTS = "local.login.exists";
 	public static final String NEWS_NOT_FOUND = "local.news.not.found";
+	public static final String USERS_NOT_FOUND = "local.users.not.found";
 	public static final String NEWS_DELETED = "local.news.deleted";
+	public static final String NO_USERS_SELECTED = "local.no.users.selected";
 	public static final String EN = "en";
 }

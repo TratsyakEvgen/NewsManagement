@@ -8,9 +8,13 @@ import by.htp.ex.controller.impl.DoSIgnIn;
 import by.htp.ex.controller.impl.DoSignOut;
 import by.htp.ex.controller.impl.DoUpdateAccount;
 import by.htp.ex.controller.impl.DoUpdatePassword;
+import by.htp.ex.controller.impl.DoUpdateRole;
 import by.htp.ex.controller.impl.GoToAccount;
+import by.htp.ex.controller.impl.GoToAdminMenu;
 import by.htp.ex.controller.impl.GoToBasePage;
 import by.htp.ex.controller.impl.GoToErrorPage;
+import by.htp.ex.controller.impl.GoToFileSystem;
+import by.htp.ex.controller.impl.GoToListUsers;
 import by.htp.ex.controller.impl.GoToRegistration;
 import by.htp.ex.controller.impl.GoToViewNews;
 import by.htp.ex.controller.impl.ChangeLocal;
@@ -36,6 +40,10 @@ public final class CommandProvider {
 		commands.put(CommandName.DO_UPDATE_ACCOUNT, new DoUpdateAccount());
 		commands.put(CommandName.DO_UPDATE_PASSWORD, new DoUpdatePassword());
 		commands.put(CommandName.DO_DELETE_ACCOUNT, new DoDeleteAccount());
+		commands.put(CommandName.GO_TO_ADMIN_MENU, new GoToAdminMenu());
+		commands.put(CommandName.GO_TO_LIST_USERS, new GoToListUsers());
+		commands.put(CommandName.DO_UPDATE_ROLE, new DoUpdateRole());
+		commands.put(CommandName.GO_TO_FILE_SYSTEM, new GoToFileSystem());
 	}
 	
 	public final static CommandProvider getInstance() {

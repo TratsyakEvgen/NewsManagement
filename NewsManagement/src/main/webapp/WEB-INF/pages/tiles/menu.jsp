@@ -9,3 +9,7 @@
 	<c:import url="/WEB-INF/pages/tiles/menuAccount.jsp" />
 </c:if>
 
+<c:if test="${requestScope.menu_presentation == 'view_admin'}">
+	<c:import url="/WEB-INF/pages/tiles/menuAdmin.jsp" />
+</c:if>
+
