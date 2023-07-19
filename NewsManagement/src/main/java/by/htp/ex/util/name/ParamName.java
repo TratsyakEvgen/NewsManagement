@@ -35,5 +35,8 @@ public class ParamName {
 	public static final String UPDATE_PASSWORD = "updatePassword";
 	public static final String VIEW_FILES = "view_files";
 	public static final String FILES = "files";
+	public static final String FILE = "file";
 	public static final String DELETE = "delete";
+	public static final String DIR = "dir";
+	public static final String LINK = "link";
 }

@@ -4,48 +4,54 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
-<fmt:message bundle="${loc}" key="local.first.name" var="first_name" />
-<fmt:message bundle="${loc}" key="local.last.name" var="last_name" />
-<fmt:message bundle="${loc}" key="local.email" var="email" />
-<fmt:message bundle="${loc}" key="local.registration.date"
-	var="registration_date" />
+<fmt:message bundle="${loc}" key="local.upload" var="upload" />
 <fmt:message bundle="${loc}" key="local.update" var="update" />
-<fmt:message bundle="${loc}" key="local.id" var="id" />
-<fmt:message bundle="${loc}" key="local.role" var="role" />
-<fmt:message bundle="${loc}" key="local.select" var="select" />
-<fmt:message bundle="${loc}" key="local.user" var="user_local" />
-<fmt:message bundle="${loc}" key="local.admin" var="admin" />
-<fmt:message bundle="${loc}" key="local.deleted" var="deleted" />
+<fmt:message bundle="${loc}" key="local.delete" var="delete" />
+<fmt:message bundle="${loc}" key="local.file" var="file" />
 
-<form action="controller" method="post">
-	<input type="hidden" name="command" value="do_update_role">
 
-	<div class="row">
-		<div class="col">
-			<input type="submit" class="btn btn-dark btn-outline-light"
-				value="add">
-		</div>
+<div class="row">
+	<div class="col">
+		<form action="controller" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="command" value="do_upload_file"> <input
+				type="hidden" name="dir" value="${requestScope.dir}"> <input
+				type="file" name="file" /> <input type="submit"
+				class="btn btn-dark btn-outline-light" value="${upload}">
+		</form>
 	</div>
-</form>
+</div>
+
 <div class="row table-responsive">
 	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">${file}</th>
+				<th scope="col">${update}</th>
+				<th scope="col">${delete}</th>
+			</tr>
+		</thead>
 		<tbody>
 			<c:forEach var="file" items="${requestScope.files}">
 				<tr>
-					<td scope="row"><a href="${file}">${file}</a></td>
+					<th scope="row"><a href="${file}">${file}</a></th>
 					<td>
-						<form action="controller" method="post">
-							<input type="hidden" name="command" value="do_update_role">
-							<input type="submit" class="btn btn-dark btn-outline-light"
-								value="update">
-
+						<form action="controller" method="post"
+							enctype="multipart/form-data">
+							<input type="hidden" name="command" value="do_update_file">
+							<input type="hidden" name="dir" value="${requestScope.dir}">
+							<input type="hidden" name="link" value="${file}"> <input
+								type="file" name="file" /> <input type="submit"
+								class="btn btn-dark btn-outline-light" value="${update}">
 						</form>
 					</td>
 					<td>
-						<form action="controller" method="post">
-							<input type="hidden" name="command" value="do_update_role">
-							<input type="submit" class="btn btn-dark btn-outline-light"
-								value="delete">
+						<form action="controller" method="post"
+							enctype="multipart/form-data">
+							<input type="hidden" name="command" value="do_delete_file">
+							<input type="hidden" name="dir" value="${requestScope.dir}">
+							<input type="hidden" name="link" value="${file}"> <input
+								type="submit" class="btn btn-dark btn-outline-light"
+								value="${delete}">
 						</form>
 					</td>
 				</tr>

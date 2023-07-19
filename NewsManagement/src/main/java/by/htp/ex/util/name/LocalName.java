@@ -18,5 +18,8 @@ public class LocalName {
 	public static final String USERS_NOT_FOUND = "local.users.not.found";
 	public static final String NEWS_DELETED = "local.news.deleted";
 	public static final String NO_USERS_SELECTED = "local.no.users.selected";
+	public static final String FILE_NOT_SELECTED = "local.file.not.selected";
+	public static final String FILE_DOES_NOT_EXIST = "local.file.does.not.exit";
+	public static final String FILE_ALREADY_EXIST = "local.file.already.exit";
 	public static final String EN = "en";
 }
