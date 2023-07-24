@@ -2,14 +2,12 @@ package by.htp.ex.controller.impl;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
 
 import by.htp.ex.controller.Command;
 import by.htp.ex.service.IFileSystemService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.service.impl.DirectoryName;
-import by.htp.ex.util.lock.ReentrantLockSingleton;
 import by.htp.ex.util.logger.ConsoleLogger;
 import by.htp.ex.util.name.LinkName;
 import by.htp.ex.util.name.ParamName;
@@ -21,13 +19,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class GoToFileSystem implements Command {
 
 	private IFileSystemService service = ServiceProvider.getInstance().getFileSystemService();
-	private ReentrantLock reentrantLock = ReentrantLockSingleton.getInstance();
+
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dir = request.getParameter(ParamName.DIR);
 		String realPath = request.getServletContext().getRealPath("");
-		reentrantLock.lock();
+
 		try {
 			String directory = DirectoryName.valueOf(dir.toUpperCase()).getDir();
 			String dirPath = request.getServletContext().getRealPath(directory);
@@ -50,8 +48,6 @@ public class GoToFileSystem implements Command {
 			request.setAttribute(ParamName.ERROR, 404);
 			request.getRequestDispatcher(LinkName.COMMAND_GO_TO_ERROR_PAGE).forward(request, response);
 
-		} finally {
-			reentrantLock.unlock();
 		}
 
 	}

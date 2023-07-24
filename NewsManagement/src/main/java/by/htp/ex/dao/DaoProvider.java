@@ -1,5 +1,6 @@
 package by.htp.ex.dao;
 
+import by.htp.ex.dao.impl.ImageDAO;
 import by.htp.ex.dao.impl.NewsDAO;
 import by.htp.ex.dao.impl.UserDAO;
 
@@ -8,6 +9,7 @@ public final class DaoProvider {
 
 	private final IUserDAO userDao = new UserDAO();
 	private final INewsDAO newsDAO = new NewsDAO();
+	private final IImageDAO imageDAO = new ImageDAO();
 
 	private DaoProvider() {
 	}
@@ -18,6 +20,10 @@ public final class DaoProvider {
 
 	public INewsDAO getNewsDAO() {
 		return newsDAO;
+	}
+	
+	public IImageDAO getImageDAO() {
+		return imageDAO;
 	}
 
 	public static DaoProvider getInstance() {

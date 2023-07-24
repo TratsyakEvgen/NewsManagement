@@ -3,7 +3,6 @@ package by.htp.ex.controller.impl;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
 
 import by.htp.ex.controller.Command;
 import by.htp.ex.service.IFileSystemService;
@@ -11,7 +10,6 @@ import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.service.ServiceUserExeption;
 import by.htp.ex.service.impl.DirectoryName;
-import by.htp.ex.util.lock.ReentrantLockSingleton;
 import by.htp.ex.util.logger.ConsoleLogger;
 import by.htp.ex.util.name.LinkName;
 import by.htp.ex.util.name.ParamName;
@@ -24,7 +22,7 @@ import jakarta.servlet.http.Part;
 public class DoUploadFile implements Command {
 
 	private IFileSystemService service = ServiceProvider.getInstance().getFileSystemService();
-	private ReentrantLock reentrantLock = ReentrantLockSingleton.getInstance();
+
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +30,7 @@ public class DoUploadFile implements Command {
 		String dir = request.getParameter(ParamName.DIR);
 		Part file = request.getPart(ParamName.FILE);
 
-		reentrantLock.lock();
+
 		try {
 			String direcory = DirectoryName.valueOf(dir.toUpperCase()).getDir();
 			String dirPath = request.getServletContext().getRealPath(direcory);
@@ -49,8 +47,6 @@ public class DoUploadFile implements Command {
 			session.setAttribute(ParamName.MAP_ATTR_ERROR, mapAttrError);
 			session.setAttribute(ParamName.DIR, dir);
 			response.sendRedirect(LinkName.MESSAGE_ERROR);
-		} finally {
-			reentrantLock.unlock();
 		}
 
 	}

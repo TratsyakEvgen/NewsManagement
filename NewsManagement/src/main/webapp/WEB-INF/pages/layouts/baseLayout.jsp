@@ -77,18 +77,18 @@
 				</div>
 			</main>
 		</div>
+	</div>
+
+
+	<footer class="fixed-bottom bg-dark text-center text-white">
+		2023 Copyright: <a class="text-decoration-none text-reset"
+			href="https://Sharaga.com/">Sharaga.com</a>
+	</footer>
 
 
 
-		<footer class="fixed-bottom bg-dark text-center text-white">
-			2023 Copyright: <a class="text-decoration-none text-reset"
-				href="https://Sharaga.com/">Sharaga.com</a>
-		</footer>
 
-
-
-
-		<script src="script/popper.min.js"></script>
-		<script src="script/bootstrap.js"></script>
+	<script src="script/popper.min.js"></script>
+	<script src="script/bootstrap.js"></script>
 </body>
 </html>

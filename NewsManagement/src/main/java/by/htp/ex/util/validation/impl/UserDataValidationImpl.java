@@ -1,8 +1,10 @@
-package by.htp.ex.util.validation;
+package by.htp.ex.util.validation.impl;
 
 import by.htp.ex.bean.User;
 import by.htp.ex.util.name.LocalName;
 import by.htp.ex.util.name.RegExName;
+import by.htp.ex.util.validation.UserDataValidation;
+import by.htp.ex.util.validation.ValidationException;
 
 public class UserDataValidationImpl implements UserDataValidation {
 

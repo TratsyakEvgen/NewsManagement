@@ -8,6 +8,7 @@ import by.htp.ex.controller.impl.DoSIgnIn;
 import by.htp.ex.controller.impl.DoSignOut;
 import by.htp.ex.controller.impl.DoUpdateAccount;
 import by.htp.ex.controller.impl.DoUpdateFile;
+import by.htp.ex.controller.impl.DoUpdateImage;
 import by.htp.ex.controller.impl.DoUpdatePassword;
 import by.htp.ex.controller.impl.DoUpdateRole;
 import by.htp.ex.controller.impl.DoUploadFile;
@@ -16,10 +17,12 @@ import by.htp.ex.controller.impl.GoToAdminMenu;
 import by.htp.ex.controller.impl.GoToBasePage;
 import by.htp.ex.controller.impl.GoToErrorPage;
 import by.htp.ex.controller.impl.GoToFileSystem;
+import by.htp.ex.controller.impl.GoToGallery;
 import by.htp.ex.controller.impl.GoToListUsers;
 import by.htp.ex.controller.impl.GoToRegistration;
 import by.htp.ex.controller.impl.GoToViewNews;
 import by.htp.ex.controller.impl.ChangeLocal;
+import by.htp.ex.controller.impl.DoAddImage;
 import by.htp.ex.controller.impl.DoDeleteAccount;
 import by.htp.ex.controller.impl.DoDeleteFile;
 import by.htp.ex.controller.impl.DoRegistration;
@@ -50,6 +53,9 @@ public final class CommandProvider {
 		commands.put(CommandName.DO_UPLOAD_FILE, new DoUploadFile());
 		commands.put(CommandName.DO_UPDATE_FILE, new DoUpdateFile());
 		commands.put(CommandName.DO_DELETE_FILE, new DoDeleteFile());
+		commands.put(CommandName.GO_TO_GALLERY, new GoToGallery());
+		commands.put(CommandName.DO_ADD_IMAGE, new DoAddImage());
+		commands.put(CommandName.DO_UPDATE_IMAGE, new DoUpdateImage());
 	}
 	
 	public final static CommandProvider getInstance() {

@@ -7,8 +7,10 @@ public class Image implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String link;
+	private boolean status;
 	
-	public Image() {		
+	public Image() {
+		super();
 	}
 
 	public int getId() {
@@ -27,9 +29,17 @@ public class Image implements Serializable{
 		this.link = link;
 	}
 
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, link);
+		return Objects.hash(id, link, status);
 	}
 
 	@Override
@@ -41,15 +51,12 @@ public class Image implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Image other = (Image) obj;
-		return id == other.id && Objects.equals(link, other.link);
+		return id == other.id && Objects.equals(link, other.link) && status == other.status;
 	}
 
 	@Override
 	public String toString() {
-		return "Images [id=" + id + ", link=" + link + "]";
-	}
-	
-	
-	
+		return "Image [id=" + id + ", link=" + link + ", status=" + status + "]";
+	}	
 
 }

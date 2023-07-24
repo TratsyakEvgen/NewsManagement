@@ -16,6 +16,7 @@ public class ParamName {
 	public static final String ERROR = "error";
 	public static final String NEWS_LIST = "news_list";
 	public static final String USER_LIST = "user_list";
+	public static final String IMAGE_LIST = "image_list";
 	public static final String VIEW_NEWS = "view_news";
 	public static final String START_PAGE = "start_page";
 	public static final String ID = "id";
@@ -39,4 +40,6 @@ public class ParamName {
 	public static final String DELETE = "delete";
 	public static final String DIR = "dir";
 	public static final String LINK = "link";
+	public static final String STATUS = "status";
+	public static final String ADD_IMAGE = "add_image";
 }

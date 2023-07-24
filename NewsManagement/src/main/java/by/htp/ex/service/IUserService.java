@@ -20,7 +20,7 @@ public interface IUserService {
 
 	void deleteAccount(int id, String login, String password) throws ServiceUserExeption, ServiceException;
 
-	List<User> getAllUsers() throws ServiceException, ServiceUserExeption;
+	List<User> getAllUsers() throws ServiceException;
 
 	void updateRole(Map<String, String[]> params) throws ServiceException, ServiceUserExeption;
 

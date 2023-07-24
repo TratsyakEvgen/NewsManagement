@@ -30,13 +30,10 @@ public class UserService implements IUserService {
 	private final UserDataValidation userDataValidation = ValidationProvider.getInstance().getUserDataValidation();
 
 	@Override
-	public List<User> getAllUsers() throws ServiceException, ServiceUserExeption {
+	public List<User> getAllUsers() throws ServiceException{
 		List<User> users = null;
 		try {
 			users = userDAO.getAll();
-			if (users == null) {
-				throw new ServiceUserExeption(LocalName.USERS_NOT_FOUND);
-			}
 		} catch (DaoException e) {
 			throw new ServiceException("Can't get all users", e);
 		}
