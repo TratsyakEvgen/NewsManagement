@@ -9,13 +9,11 @@ public class News implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id = 0;
-	private String title;
-	private String link;
+	private Integer id;
 	private Date newsDate;
 	private boolean status;
+	private List<LocalContentNews> listLocalContentNews;
 	private List<Image> images;
-	private String local;
 	private User author;
 	
 	public News() {		
@@ -27,22 +25,6 @@ public class News implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
 	}
 
 	public Date getNewsDate() {
@@ -61,20 +43,20 @@ public class News implements Serializable {
 		this.status = status;
 	}
 
+	public List<LocalContentNews> getListLocalContentNews() {
+		return listLocalContentNews;
+	}
+
+	public void setListLocalContentNews(List<LocalContentNews> listLocalContentNews) {
+		this.listLocalContentNews = listLocalContentNews;
+	}
+
 	public List<Image> getImages() {
 		return images;
 	}
 
 	public void setImages(List<Image> images) {
 		this.images = images;
-	}
-
-	public String getLocal() {
-		return local;
-	}
-
-	public void setLocal(String local) {
-		this.local = local;
 	}
 
 	public User getAuthor() {
@@ -87,7 +69,7 @@ public class News implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, id, images, link, local, newsDate, status, title);
+		return Objects.hash(author, id, images, listLocalContentNews, newsDate, status);
 	}
 
 	@Override
@@ -100,19 +82,15 @@ public class News implements Serializable {
 			return false;
 		News other = (News) obj;
 		return Objects.equals(author, other.author) && Objects.equals(id, other.id)
-				&& Objects.equals(images, other.images) && Objects.equals(link, other.link)
-				&& Objects.equals(local, other.local) && Objects.equals(newsDate, other.newsDate)
-				&& status == other.status && Objects.equals(title, other.title);
+				&& Objects.equals(images, other.images)
+				&& Objects.equals(listLocalContentNews, other.listLocalContentNews)
+				&& Objects.equals(newsDate, other.newsDate) && status == other.status;
 	}
 
 	@Override
 	public String toString() {
-		return "News [id=" + id + ", title=" + title + ", link=" + link + ", newsDate=" + newsDate + ", status="
-				+ status + ", images=" + images + ", local=" + local + ", author=" + author + "]";
+		return "News [id=" + id + ", newsDate=" + newsDate + ", status=" + status + ", listLocalContentNews="
+				+ listLocalContentNews + ", images=" + images + ", author=" + author + "]";
 	}
-
-	
-
-
 
 }

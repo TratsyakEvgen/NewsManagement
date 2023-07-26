@@ -10,7 +10,7 @@ public interface IImageDAO {
 
 	void update(Image image) throws DaoException;
 
-	int isExistLink(String link) throws DaoException;
+	int findByLink(String link) throws DaoException;
 
 	void create(Image image) throws DaoException;
 

@@ -19,8 +19,10 @@ import by.htp.ex.controller.impl.GoToErrorPage;
 import by.htp.ex.controller.impl.GoToFileSystem;
 import by.htp.ex.controller.impl.GoToGallery;
 import by.htp.ex.controller.impl.GoToListUsers;
+import by.htp.ex.controller.impl.GoToNewsManagement;
 import by.htp.ex.controller.impl.GoToRegistration;
 import by.htp.ex.controller.impl.GoToViewNews;
+import by.htp.ex.controller.impl.GoToViewNewsAsAdmin;
 import by.htp.ex.controller.impl.ChangeLocal;
 import by.htp.ex.controller.impl.DoAddImage;
 import by.htp.ex.controller.impl.DoDeleteAccount;
@@ -39,6 +41,7 @@ public final class CommandProvider {
 		commands.put(CommandName.DO_SIGN_IN, new DoSIgnIn());
 		commands.put(CommandName.DO_SIGN_OUT, new DoSignOut());
 		commands.put(CommandName.GO_TO_VIEW_NEWS, new GoToViewNews());
+		commands.put(CommandName.GO_TO_VIEW_NEWS_AS_ADMIN, new GoToViewNewsAsAdmin());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
 		commands.put(CommandName.GO_TO_AUTHENTICATION, new GoToAuthentication());
 		commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPage());
@@ -56,6 +59,7 @@ public final class CommandProvider {
 		commands.put(CommandName.GO_TO_GALLERY, new GoToGallery());
 		commands.put(CommandName.DO_ADD_IMAGE, new DoAddImage());
 		commands.put(CommandName.DO_UPDATE_IMAGE, new DoUpdateImage());
+		commands.put(CommandName.GO_TO_NEWS_MANAGEMENT, new GoToNewsManagement());
 	}
 	
 	public final static CommandProvider getInstance() {

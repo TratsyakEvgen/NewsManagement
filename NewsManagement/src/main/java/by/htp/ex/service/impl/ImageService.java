@@ -44,7 +44,7 @@ public class ImageService implements IIamgeService{
 		ReentrantLock reentrantLock = ReentrantLockSingleton.getInstance();
 		reentrantLock.lock();
 		try {			
-			if (imageDAO.isExistLink(link) != 0) {
+			if (imageDAO.findByLink(link) != 0) {
 				throw new ServiceUserExeption(LocalName.LINK_EXISTS);
 			}
 			
@@ -72,7 +72,7 @@ public class ImageService implements IIamgeService{
 		ReentrantLock reentrantLock = ReentrantLockSingleton.getInstance();
 		reentrantLock.lock();
 		try {	
-			int id = imageDAO.isExistLink(image.getLink());
+			int id = imageDAO.findByLink(image.getLink());
 			if ((id != 0) && (id != image.getId())) {
 				throw new ServiceUserExeption(LocalName.LINK_EXISTS);
 			}

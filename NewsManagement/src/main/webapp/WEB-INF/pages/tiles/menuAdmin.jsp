@@ -9,7 +9,10 @@
 <fmt:message bundle="${loc}" key="local.file.system.documents"
 	var="file_system_documents" />
 <fmt:message bundle="${loc}" key="local.gallery"
-	var="gallery" />	
+	var="gallery" />
+	<fmt:message bundle="${loc}" key="local.news.management"
+	var="news_management" />
+		
 
 
 <ul class="nav flex-column">
@@ -17,6 +20,9 @@
 	<li><a class="text-decoration-none text-reset"
 		href="controller?command=go_to_list_users">${users}</a>
 		<hr class="my-3"></li>
+	<li><a class="text-decoration-none text-reset"
+		href="controller?command=go_to_news_management">${news_management}</a>
+		<hr class="my-3"></li>	
 	<li><a class="text-decoration-none text-reset"
 		href="controller?command=go_to_gallery">${gallery}</a>
 		<hr class="my-3"></li>

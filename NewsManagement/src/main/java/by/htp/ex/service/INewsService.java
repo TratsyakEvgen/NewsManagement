@@ -1,19 +1,17 @@
 package by.htp.ex.service;
 
 import java.util.List;
-import java.util.Map;
-
 import by.htp.ex.bean.News;
 
 public interface INewsService {
 
-	List<News> getNewsList(String local) throws ServiceException, ServiceUserExeption;
+	List<News> getActiveNewsByLocal(String local) throws ServiceException;
 
-	List<News> convertInListActiveNewsSortedByDate(Map<Integer, News> newsMap);
+	List<News> getAll() throws ServiceException;
 
-	void checkContainsActiveNewsElseThrow(int id, Map<Integer, News> newsMap) throws ServiceUserExeption;
+	News getNewsByLocalContentId(int id, boolean active) throws ServiceException, ServiceUserExeption;
 
-	Map<Integer, News> getMapNewsByLocal(String local) throws ServiceException, ServiceUserExeption;
+
 
 
 

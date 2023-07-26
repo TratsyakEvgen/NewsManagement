@@ -28,3 +28,7 @@
 <c:if test="${requestScope.main_presentation == 'image_list'}">
 	<c:import url="/WEB-INF/pages/tiles/viewGallery.jsp" />
 </c:if>
+
+<c:if test="${requestScope.main_presentation == 'news_list'}">
+	<c:import url="/WEB-INF/pages/tiles/newsManagementList.jsp" />
+</c:if>

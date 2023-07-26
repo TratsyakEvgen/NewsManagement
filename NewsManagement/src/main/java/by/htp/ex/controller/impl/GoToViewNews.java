@@ -29,16 +29,16 @@ public class GoToViewNews implements Command {
 		String local = (String) session.getAttribute(ParamName.LOCAL);
 
 		try {
-			Map<Integer, News> newsMap = service.getMapNewsByLocal(local);
-			List<News> newsList = service.convertInListActiveNewsSortedByDate(newsMap);
+			int id = Integer.parseInt(request.getParameter(ParamName.ID));
+			News news = service.getNewsByLocalContentId(id, true);
+			request.setAttribute(ParamName.NEWS, news);
+			request.setAttribute(ParamName.MAIN_PRESENTATION, ParamName.VIEW_NEWS);			
+			
+			List<News> newsList = service.getActiveNewsByLocal(local);
 			request.setAttribute(ParamName.NEWS_LIST, newsList);
 			request.setAttribute(ParamName.MENU_PRESENTATION, ParamName.NEWS_LIST);
 			
-			int id = Integer.parseInt(request.getParameter(ParamName.ID));
-			service.checkContainsActiveNewsElseThrow(id, newsMap);
 			
-			request.setAttribute(ParamName.NEWS, newsMap.get(id));
-			request.setAttribute(ParamName.MAIN_PRESENTATION, ParamName.VIEW_NEWS);
 			session.setAttribute(ParamName.GO_TO_BACK, LinkName.COMMAND_GO_TO_VIEW_NEWS + request.getParameter(ParamName.ID));
 			request.getRequestDispatcher(LinkName.BASE_LAYOUT_JSP).forward(request, response);
 			
@@ -56,7 +56,7 @@ public class GoToViewNews implements Command {
 			mapAttrError.put(ParamName.ERROR, e.getMessage());
 			session.setAttribute(ParamName.MAP_ATTR_ERROR, mapAttrError);
 			response.sendRedirect(LinkName.MESSAGE_ERROR);
-		}
+		} 
 
 	}
 

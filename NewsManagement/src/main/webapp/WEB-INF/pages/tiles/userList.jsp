@@ -47,7 +47,7 @@
 						<td>${user.name}</td>
 						<td>${user.surname}</td>
 						<td>${user.email}</td>
-						<td>${user.registerDate}</td>
+						<td><fmt:formatDate type="date" value="${user.registerDate}" /></td>
 						<td><select class="form-select" name="${user.id}">
 								<option value="user"
 									<c:if test="${user.role == 'user'}">selected</c:if>>${user_local}</option>

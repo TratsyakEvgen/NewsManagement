@@ -88,13 +88,13 @@ public class ImageDAO implements IImageDAO {
 		}
 	}
 
-	private static final String QUERY_IS_EXIST_LINK = "SELECT images.id FROM images WHERE images. link =  ?";
+	private static final String QUERY_FIND_BY_LINK = "SELECT images.id FROM images WHERE images. link =  ?";
 
 	@Override
-	public int isExistLink(String link) throws DaoException {
+	public int findByLink(String link) throws DaoException {
 
 		try (Connection connection = connectionPool.takeConnection();
-				PreparedStatement statment = connection.prepareStatement(QUERY_IS_EXIST_LINK)) {
+				PreparedStatement statment = connection.prepareStatement(QUERY_FIND_BY_LINK)) {
 			statment.setString(1, link);
 			try (ResultSet resultSet = statment.executeQuery()) {
 				if (resultSet.next()) {

@@ -7,6 +7,9 @@
 <fmt:message bundle="${loc}" key="local.news.date" var="news_date" />
 <fmt:message bundle="${loc}" key="local.news.author" var="author" />
 
+<c:set var="news" value="${requestScope.news}"></c:set>
+<c:set var="localContent" value="${news.listLocalContentNews.get(0)}"></c:set>
+
 <div class="row">
 	<div class="col">
 		<div class="row">
@@ -14,7 +17,7 @@
 				<h5>${news_title}</h5>
 			</div>
 			<div class="col-10">
-				<h5>${requestScope.news.title}</h5>
+				<h5>${localContent.title}</h5>
 			</div>
 		</div>
 		<div class="row">
@@ -22,8 +25,10 @@
 				<h5>${news_date}</h5>
 			</div>
 			<div class="col-10">
-			<h5><fmt:formatDate type="both" dateStyle="long" timeStyle="long"
-					value="${requestScope.news.newsDate}" /></h5>
+				<h5>
+					<fmt:formatDate type="both" dateStyle="long" timeStyle="long"
+						value="${news.newsDate}" />
+				</h5>
 			</div>
 		</div>
 		<div class="row">
@@ -31,28 +36,25 @@
 				<h5>${author}</h5>
 			</div>
 			<div class="col-10">
-				<h5>${requestScope.news.author.surname}
-					${requestScope.news.author.name}</h5>
+				<c:set var="author" value="${news.author}"></c:set>
+				<h5>${author.surname}${author.name}</h5>
 			</div>
 		</div>
 	</div>
 </div>
 
 
-
-<c:if test="${!requestScope.news.images.isEmpty()}">
-	<div class="row justify-content-center border-bottom">
+<c:set var="images" value="${requestScope.news.images}"></c:set>
+<c:if test="${!images.isEmpty()}">
+	<div class="row justify-content-center">
 		<div class="col-md-10 col-lg-8">
 			<div id="carousel" class="carousel slide carousel-fade">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="${requestScope.news.images.get(0).link}"
-							class="d-block w-100">
+						<img src="${images.get(0).link}" class="d-block w-100">
 					</div>
-					<c:if test="${requestScope.news.images.size() > 1}">
-						<c:forEach var="image" items="${requestScope.news.images}"
-							begin="1">
-
+					<c:if test="${images.size() > 1}">
+						<c:forEach var="image" items="${images}" begin="1">
 							<div class="carousel-item">
 								<img src="${image.link}" class="d-block w-100">
 							</div>
@@ -73,9 +75,11 @@
 	</div>
 </c:if>
 
+<hr class="my-3">
+
 <div class="row">
 	<div class="col">
-		<iframe src="${requestScope.news.link}" width="100%" frameborder=0
+		<iframe src="${localContent.link}" width="100%" frameborder=0
 			scrolling=no
 			onload="this.style.height=this.contentDocument.body.scrollHeight + 100 +'px';">
 		</iframe>

@@ -15,50 +15,59 @@ import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceUserExeption;
 import by.htp.ex.util.name.LocalName;
 
+
 public class NewsService implements INewsService {
 
 	private final INewsDAO newsDAO = DaoProvider.getInstance().getNewsDAO();
 	
 	@Override
-	public Map<Integer, News> getMapNewsByLocal(String local) throws ServiceException, ServiceUserExeption {
+	public List<News> getAll() throws ServiceException{
 		Map<Integer, News> newsMap;
 		try {
-			newsMap = newsDAO.getListNewsByLocal(local);
-			if (newsMap.isEmpty()) {
-				throw new ServiceUserExeption(LocalName.NEWS_NOT_FOUND);
-			}			
+			newsMap = newsDAO.getAll();
 		} catch (NewsDAOException e) {
-			throw new ServiceException("Can't get map news by local", e);
+			throw new ServiceException("Can't get all news", e);
 		}
-		return newsMap;
-	}
-
-	@Override
-	public List<News> getNewsList(String local) throws ServiceException, ServiceUserExeption{
-		Map<Integer, News> newsMap = getMapNewsByLocal(local);		
-		return convertInListActiveNewsSortedByDate(newsMap);		
-	}
-
-	@Override
-	public List<News> convertInListActiveNewsSortedByDate(Map<Integer, News> newsMap){
-		List<News> newsList = new ArrayList<>(newsMap.values());
-		newsList = newsList.stream().filter(News::isStatus).sorted(Comparator.comparing(News::getNewsDate))
-				.collect(Collectors.toList());
-		return newsList;
-
-	}
-
-	@Override
-	public void checkContainsActiveNewsElseThrow(int id, Map<Integer, News> newsMap) throws ServiceUserExeption {
-		if (!newsMap.containsKey(id)) {
-			throw new ServiceUserExeption(LocalName.NEWS_NOT_FOUND);
+		if (newsMap != null) {
+			return new ArrayList<>(newsMap.values()).stream()
+					.sorted(Comparator.comparing(News::getNewsDate))
+					.collect(Collectors.toList());		
 		}
-		if (!newsMap.get(id).isStatus()) {
-			throw new ServiceUserExeption(LocalName.NEWS_DELETED);
-		}
-
+		return null;
 	}
-
 	
+
+	@Override
+	public List<News> getActiveNewsByLocal(String local) throws ServiceException{
+		Map<Integer, News> newsMap;
+		try {
+			newsMap = newsDAO.getActiveNewsByLocal(local);
+		} catch (NewsDAOException e) {
+			throw new ServiceException("Can't get active news by local", e);
+		}
+		if (newsMap != null) {
+			return new ArrayList<>(newsMap.values()).stream()
+					.sorted(Comparator.comparing(News::getNewsDate))
+					.collect(Collectors.toList());			
+		}
+		return null;
+			
+	}
+	
+	@Override
+	public News getNewsByLocalContentId(int id, boolean active) throws ServiceException, ServiceUserExeption{
+		News news;
+		try {
+			news = newsDAO.getNewsByLocalContentId(id, active);
+			if (news == null) {
+				throw new ServiceUserExeption(LocalName.NEWS_NOT_FOUND);
+			}
+		} catch (NewsDAOException e) {
+			throw new ServiceException("Can't get active news by local content id", e);
+		}
+		return news;		
+	}
+
+
 
 }

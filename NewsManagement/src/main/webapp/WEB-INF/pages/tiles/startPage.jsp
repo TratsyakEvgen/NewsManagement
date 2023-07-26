@@ -7,7 +7,8 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.lastet.news" var="lastet_news" />
-
+<fmt:message bundle="${loc}" key="local.news.not.found"
+	var="news_not_found" />
 
 
 
@@ -17,30 +18,27 @@
 </div>
 
 <c:set var="news_list" value="${requestScope.news_list}"></c:set>
-<c:if test="${!news_list.isEmpty()}">
-	<div class="row justify-content-center">
-		<div class="col-10">
+<div class="row justify-content-center">
+	<div class="col-10">
+		<c:if test="${news_list != null}">
 			<div id="carousel" class="carousel slide carousel-fade"
 				data-bs-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<c:set var="image" value="${news_list.get(0).images.get(0).link}"></c:set>
 						<p>
 							<a
-								href="controller?command=go_to_view_news&id=${news_list.get(0).id}">
-								<c:if test="${image == 'null'}">
-									<svg
-										class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-										width="800" height="400">
-								<rect width="100%" height="100%" fill="#777"></rect>
-								</svg>
-								</c:if> <c:if test="${image != 'null'}">
-									<img src="${image}" class="d-block w-100">
+								<c:set var="localContent" value="${news_list.get(0).listLocalContentNews.get(0)}"></c:set>
+								href="controller?command=go_to_view_news&id=${localContent.id}">
+								<c:set var="listImages" value="${news_list.get(0).images}"></c:set>
+								<c:if test="${listImages.isEmpty()}">
+									<img src="images/gray.png" class="d-block w-100">
+								</c:if> <c:if test="${!listImages.isEmpty()}">
+									<img src="${listImages.get(0).link}" class="d-block w-100">
 								</c:if>
 							</a>
 						</p>
 						<div class="carousel-caption d-noned md-block ">
-							<h1>${news_list.get(0).title}</h1>
+							<h1>${localContent.title}</h1>
 						</div>
 
 					</div>
@@ -50,20 +48,19 @@
 							<div class="carousel-item">
 								<c:set var="image" value="${news.images.get(0).link}"></c:set>
 								<p>
-									<a href="controller?command=go_to_view_news&id=${news.id}">
-										<c:if test="${image == 'null'}">
-											<svg
-												class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-												width="800" height="400">
-												<rect width="100%" height="100%" fill="#777"></rect>
-								</svg>
-										</c:if> <c:if test="${image != 'null'}">
-											<img src="${image}" class="d-block w-100">
+									<a
+										<c:set var="localContent" value="${news.listLocalContentNews.get(0)}"></c:set>
+										href="controller?command=go_to_view_news&id=${localContent.id}">
+										<c:set var="listImages" value="${news.images}"></c:set> <c:if
+											test="${listImages.isEmpty()}">
+											<img src="images/gray.png" class="d-block w-100">
+										</c:if> <c:if test="${!listImages.isEmpty()}">
+											<img src="${listImages.get(0).link}" class="d-block w-100">
 										</c:if>
 									</a>
 								</p>
-								<div class="carousel-caption d-none d-md-block">
-									<h1>${news.title}</h1>
+								<div class="carousel-caption d-noned md-block ">
+									<h1>${localContent.title}</h1>
 								</div>
 							</div>
 						</c:forEach>
@@ -81,6 +78,9 @@
 
 				</button>
 			</div>
-		</div>
+		</c:if>
+		<c:if test="${news_list == null}">${news_not_found}</c:if>
 	</div>
-</c:if>
+</div>
+
+

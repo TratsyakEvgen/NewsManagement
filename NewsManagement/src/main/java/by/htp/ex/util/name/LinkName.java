@@ -6,6 +6,7 @@ public class LinkName {
 
 	public static final String LOGIN_JSP = "/WEB-INF/pages/login.jsp";
 	public static final String COMMAND_GO_TO_AUTHENTICATION = "controller?command=go_to_authentication";
+	public static final String COMMAND_GO_TO_NEWS_MANAGEMENT = "controller?command=go_to_news_management";
 	public static final String COMMAND_GO_TO_LIST_USERS = "controller?command=go_to_list_users";
 	public static final String COMMAND_GO_TO_GALLERY = "controller?command=go_to_gallery";
 	public static final String COMMAND_GO_TO_FILE_SYSTEM = "controller?command=go_to_file_system";
