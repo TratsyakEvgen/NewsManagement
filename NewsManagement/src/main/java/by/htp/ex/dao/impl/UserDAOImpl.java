@@ -16,16 +16,16 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import by.htp.ex.bean.User;
 import by.htp.ex.dao.DaoException;
-import by.htp.ex.dao.IUserDAO;
+import by.htp.ex.dao.UserDAO;
 import by.htp.ex.dao.connection.pool.ConnectionPool;
 import by.htp.ex.dao.connection.pool.ConnectionPoolException;
 import by.htp.ex.util.name.ParamName;
 
-public class UserDAO implements IUserDAO {
+public class UserDAOImpl implements UserDAO {
 
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-	public UserDAO() {
+	public UserDAOImpl() {
 	}
 
 	private static final String QUERY_FIND_ALL_USER = "SELECT users.id, roles.role, user_detailes.name,"
@@ -148,6 +148,27 @@ public class UserDAO implements IUserDAO {
 				PreparedStatement statment = connection.prepareStatement(QUERY_FIND_LOGIN)) {
 
 			statment.setString(1, String.valueOf(login));
+			try (ResultSet resultSet = statment.executeQuery()) {
+				return resultSet.next();
+			}
+
+		} catch (SQLException e) {
+			throw new DaoException("SQLException find login.", e);
+		} catch (ConnectionPoolException e) {
+			throw new DaoException("Сonnection setup error find login.", e);
+		}
+	}
+	
+	
+	
+	private static final String QUERY_FIND_USER_BY_ID = "SELECT users.id FROM users WHERE users.id =?";
+
+	@Override
+	public boolean isExistUser(int id) throws DaoException {
+		try (Connection connection = connectionPool.takeConnection();
+				PreparedStatement statment = connection.prepareStatement(QUERY_FIND_USER_BY_ID)) {
+
+			statment.setInt(1, id);
 			try (ResultSet resultSet = statment.executeQuery()) {
 				return resultSet.next();
 			}

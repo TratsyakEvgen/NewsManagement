@@ -10,15 +10,15 @@ import java.util.List;
 
 import by.htp.ex.bean.Image;
 import by.htp.ex.dao.DaoException;
-import by.htp.ex.dao.IImageDAO;
+import by.htp.ex.dao.ImageDAO;
 import by.htp.ex.dao.connection.pool.ConnectionPool;
 import by.htp.ex.dao.connection.pool.ConnectionPoolException;
 import by.htp.ex.util.name.ParamName;
 
-public class ImageDAO implements IImageDAO {
+public class ImageDAOImpl implements ImageDAO {
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-	public ImageDAO() {
+	public ImageDAOImpl() {
 	}
 
 	private static final String QUERY_GET_ALL_IMAGES = "SELECT * FROM images";

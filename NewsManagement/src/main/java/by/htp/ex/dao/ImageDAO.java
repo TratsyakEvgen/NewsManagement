@@ -4,7 +4,7 @@ import java.util.List;
 
 import by.htp.ex.bean.Image;
 
-public interface IImageDAO {
+public interface ImageDAO {
 
 	List<Image> getAll() throws DaoException;
 

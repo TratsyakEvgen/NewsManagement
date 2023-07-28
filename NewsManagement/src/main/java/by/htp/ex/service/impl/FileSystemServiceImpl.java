@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import by.htp.ex.service.IFileSystemService;
+import by.htp.ex.service.FileSystemService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceUserExeption;
 import by.htp.ex.util.name.LocalName;
 import jakarta.servlet.http.Part;
 
-public class FileSystemService implements IFileSystemService{
+public class FileSystemServiceImpl implements FileSystemService{
 	
 	@Override
 	public List<String> getAllFiles(String part, String dir) throws ServiceException{

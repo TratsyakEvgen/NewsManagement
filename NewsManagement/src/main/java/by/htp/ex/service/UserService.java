@@ -6,7 +6,7 @@ import java.util.Map;
 import by.htp.ex.bean.User;
 
 
-public interface IUserService {
+public interface UserService {
 
 	User signIn(String login, String password) throws ServiceException, ServiceUserExeption;
 

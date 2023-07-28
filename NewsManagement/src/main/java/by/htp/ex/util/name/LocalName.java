@@ -18,6 +18,7 @@ public class LocalName {
 	public static final String LINK_EXISTS = "local.link.exists";
 	public static final String NEWS_NOT_FOUND = "local.news.not.found";
 	public static final String USERS_NOT_FOUND = "local.users.not.found";
+	public static final String AUTHOR_NOT_FOUND = "local.author.not.found";
 	public static final String NEWS_DELETED = "local.news.deleted";
 	public static final String NO_USERS_SELECTED = "local.no.users.selected";
 	public static final String FILE_NOT_SELECTED = "local.file.not.selected";

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import by.htp.ex.bean.Image;
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.IIamgeService;
+import by.htp.ex.service.IamgeService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.service.ServiceUserExeption;
@@ -20,22 +20,24 @@ import jakarta.servlet.http.HttpSession;
 
 public class DoUpdateImage implements Command {
 
-	private IIamgeService service = ServiceProvider.getInstance().getIamgeService();
+	private IamgeService service = ServiceProvider.getInstance().getIamgeService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();		
-		int id = Integer.parseInt(request.getParameter(ParamName.ID));
+		HttpSession session = request.getSession();			
 		String link = request.getParameter(ParamName.LINK);
 		boolean status = Boolean.parseBoolean(request.getParameter(ParamName.STATUS));
-
-		Image image = new Image();
-		image.setId(id);
-		image.setLink(link);
-		image.setStatus(status);
+		int id = 0;
 
 		try {
+			id = Integer.parseInt(request.getParameter(ParamName.ID));			
+			
+			Image image = new Image();
+			image.setId(id);
+			image.setLink(link);
+			image.setStatus(status);
+			
 			service.update(image);
 			response.sendRedirect(LinkName.COMMAND_GO_TO_GALLERY + LinkName.MESSAGE_DONE);
 		} catch (ServiceException | NumberFormatException e) {

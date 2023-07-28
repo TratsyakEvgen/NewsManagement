@@ -13,20 +13,20 @@ import org.mindrot.jbcrypt.BCrypt;
 import by.htp.ex.bean.User;
 import by.htp.ex.dao.DaoException;
 import by.htp.ex.dao.DaoProvider;
-import by.htp.ex.dao.IUserDAO;
+import by.htp.ex.dao.UserDAO;
 import by.htp.ex.util.lock.ReentrantLockSingleton;
 import by.htp.ex.util.name.LocalName;
 import by.htp.ex.util.name.ParamName;
 import by.htp.ex.util.validation.UserDataValidation;
 import by.htp.ex.util.validation.ValidationException;
 import by.htp.ex.util.validation.ValidationProvider;
-import by.htp.ex.service.IUserService;
+import by.htp.ex.service.UserService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceUserExeption;
 
-public class UserService implements IUserService {
+public class UserServiceImpl implements UserService {
 
-	private final IUserDAO userDAO = DaoProvider.getInstance().getUserDao();
+	private final UserDAO userDAO = DaoProvider.getInstance().getUserDao();
 	private final UserDataValidation userDataValidation = ValidationProvider.getInstance().getUserDataValidation();
 
 	@Override

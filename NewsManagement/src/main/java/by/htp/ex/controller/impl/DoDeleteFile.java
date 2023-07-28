@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.IFileSystemService;
+import by.htp.ex.service.FileSystemService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.service.ServiceUserExeption;
@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class DoDeleteFile implements Command{
 	
-	private IFileSystemService service = ServiceProvider.getInstance().getFileSystemService();
+	private FileSystemService service = ServiceProvider.getInstance().getFileSystemService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

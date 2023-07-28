@@ -42,4 +42,7 @@ public class ParamName {
 	public static final String LINK = "link";
 	public static final String STATUS = "status";
 	public static final String ADD_IMAGE = "add_image";
+	public static final String UPDATE_NEWS = "update_news";
+	public static final String SELECT = "select";
+	public static final String ID_NEWS = "id_news";
 }

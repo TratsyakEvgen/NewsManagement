@@ -11,7 +11,7 @@ import by.htp.ex.service.ServiceUserExeption;
 import by.htp.ex.util.logger.ConsoleLogger;
 import by.htp.ex.util.name.LinkName;
 import by.htp.ex.util.name.ParamName;
-import by.htp.ex.service.IUserService;
+import by.htp.ex.service.UserService;
 import by.htp.ex.service.ServiceException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class DoSIgnIn implements Command {
 
-	private final IUserService service = ServiceProvider.getInstance().getUserService();
+	private final UserService service = ServiceProvider.getInstance().getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

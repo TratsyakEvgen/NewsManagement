@@ -7,6 +7,8 @@ public class LinkName {
 	public static final String LOGIN_JSP = "/WEB-INF/pages/login.jsp";
 	public static final String COMMAND_GO_TO_AUTHENTICATION = "controller?command=go_to_authentication";
 	public static final String COMMAND_GO_TO_NEWS_MANAGEMENT = "controller?command=go_to_news_management";
+	public static final String COMMAND_GO_TO_UPDATE_NEWS = "controller?command=go_to_update_news";
+	public static final String COMMAND_GO_TO_SELECT_USER = "controller?command=go_to_select_user";
 	public static final String COMMAND_GO_TO_LIST_USERS = "controller?command=go_to_list_users";
 	public static final String COMMAND_GO_TO_GALLERY = "controller?command=go_to_gallery";
 	public static final String COMMAND_GO_TO_FILE_SYSTEM = "controller?command=go_to_file_system";
@@ -21,6 +23,7 @@ public class LinkName {
 	public static final String INDEX_JSP = "index.jsp";
 	public static final String ERROR_JSP = "error.jsp";
 	public static final String DIR = "&dir=";
+	public static final String ID = "&id=";
 	public static final String MESSAGE_DONE = "&message=done";
 	public static final String MESSAGE_ERROR = "controller?error=error";
 	public static final String BASE_LAYOUT_JSP = "WEB-INF/pages/layouts/baseLayout.jsp";

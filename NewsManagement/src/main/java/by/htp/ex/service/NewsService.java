@@ -3,7 +3,7 @@ package by.htp.ex.service;
 import java.util.List;
 import by.htp.ex.bean.News;
 
-public interface INewsService {
+public interface NewsService {
 
 	List<News> getActiveNewsByLocal(String local) throws ServiceException;
 
@@ -11,10 +11,6 @@ public interface INewsService {
 
 	News getNewsByLocalContentId(int id, boolean active) throws ServiceException, ServiceUserExeption;
 
-
-
-
-
-
+	News getNewsById(int id) throws ServiceException, ServiceUserExeption;
 
 }

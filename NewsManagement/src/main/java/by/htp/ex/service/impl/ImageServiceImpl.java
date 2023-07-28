@@ -6,8 +6,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import by.htp.ex.bean.Image;
 import by.htp.ex.dao.DaoException;
 import by.htp.ex.dao.DaoProvider;
-import by.htp.ex.dao.IImageDAO;
-import by.htp.ex.service.IIamgeService;
+import by.htp.ex.dao.ImageDAO;
+import by.htp.ex.service.IamgeService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceUserExeption;
 import by.htp.ex.util.lock.ReentrantLockSingleton;
@@ -16,9 +16,9 @@ import by.htp.ex.util.validation.ImageDataValidation;
 import by.htp.ex.util.validation.ValidationException;
 import by.htp.ex.util.validation.ValidationProvider;
 
-public class ImageService implements IIamgeService{
+public class ImageServiceImpl implements IamgeService{
 	
-	private final IImageDAO imageDAO =  DaoProvider.getInstance().getImageDAO();
+	private final ImageDAO imageDAO =  DaoProvider.getInstance().getImageDAO();
 	private final ImageDataValidation imageDataValidation = ValidationProvider.getInstance().getImageDataValidation();
 	
 	@Override

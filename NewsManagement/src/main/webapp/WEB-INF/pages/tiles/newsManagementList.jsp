@@ -25,9 +25,21 @@
 <fmt:message bundle="${loc}" key="local.role" var="role" />
 <fmt:message bundle="${loc}" key="local.user" var="user" />
 <fmt:message bundle="${loc}" key="local.admin" var="admin" />
+<fmt:message bundle="${loc}" key="local.add" var="add" />
+<fmt:message bundle="${loc}" key="local.update" var="update" />
 
 
 <div class="row table-responsive">
+
+	<form action="controller" method="post">
+		<input type="hidden" name="command" value="do_create_news">
+		<div class="col">
+			<input type="submit" class="btn btn-dark btn-outline-light"
+				value="${add}">
+		</div>
+	</form>
+
+
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>
@@ -36,6 +48,7 @@
 				<th scope="col">${images}</th>
 				<th scope="col">${author}</th>
 				<th scope="col">${status}</th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -61,8 +74,9 @@
 						<div>${first_name}:${user.name}</div>
 						<div>${last_name}:${user.surname}</div>
 						<div>${email}:${user.email}</div>
-						<div>${registration_date}: 
-						<fmt:formatDate type="date" value="${user.registerDate}" /></div>
+						<div>${registration_date}:
+							<fmt:formatDate type="date" value="${user.registerDate}" />
+						</div>
 						<div>${role}:
 							<c:if test="${user.role == 'admin'}">${admin}</c:if>
 							<c:if test="${user.role == 'user'}">${user}</c:if>
@@ -71,9 +85,19 @@
 					</td>
 					<td><c:if test="${news.status}">${active}</c:if> <c:if
 							test="${!news.status}">${deleted}</c:if></td>
+					<td>
+						<form action="controller" method="post">
+							<input type="hidden" name="command" value="go_to_update_news">
+							<input type="hidden" name="id" value="${news.id}">
+							<div class="col">
+								<input type="submit" class="btn btn-dark btn-outline-light"
+									value="${update}">
+							</div>
+						</form>
+					</td>
 				</tr>
 				<tr>
-					<td colspan="5">
+					<td colspan="6">
 						<table class="table table-hover table-bordered">
 							<thead>
 								<tr>
@@ -91,8 +115,8 @@
 										<td><c:if test="${localContent.local == 'en'}">${en}</c:if>
 											<c:if test="${localContent.local == 'ru'}">${ru}</c:if></td>
 										<td><a
-											<c:out value="href=controller?command=go_to_view_news_as_admin&id=${localContent.id}" />>
-												${localContent.title} </a></td>
+											href="href=controller?command=go_to_view_news_as_admin&id=${localContent.id}">
+												${localContent.title}</a></td>
 										<td><a href="${localContent.link}">${localContent.link}</a>
 										</td>
 									</tr>

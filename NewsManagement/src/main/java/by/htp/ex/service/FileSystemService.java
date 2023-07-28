@@ -4,7 +4,7 @@ import java.util.List;
 
 import jakarta.servlet.http.Part;
 
-public interface IFileSystemService {
+public interface FileSystemService {
 
 	List<String> getAllFiles(String part, String dir) throws ServiceException;
 

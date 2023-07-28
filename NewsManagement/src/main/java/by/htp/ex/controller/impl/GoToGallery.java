@@ -5,7 +5,7 @@ import java.util.List;
 
 import by.htp.ex.bean.Image;
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.IIamgeService;
+import by.htp.ex.service.IamgeService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.util.logger.ConsoleLogger;
@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToGallery implements Command{
 	
-	private IIamgeService service = ServiceProvider.getInstance().getIamgeService();
+	private IamgeService service = ServiceProvider.getInstance().getIamgeService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

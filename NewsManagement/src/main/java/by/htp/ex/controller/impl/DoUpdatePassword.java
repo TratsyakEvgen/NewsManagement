@@ -6,7 +6,7 @@ import java.util.Map;
 
 import by.htp.ex.bean.User;
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.IUserService;
+import by.htp.ex.service.UserService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.service.ServiceUserExeption;
@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class DoUpdatePassword implements Command {
 
-	private final IUserService service = ServiceProvider.getInstance().getUserService();
+	private final UserService service = ServiceProvider.getInstance().getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.IFileSystemService;
+import by.htp.ex.service.FileSystemService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.service.impl.DirectoryName;
@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToFileSystem implements Command {
 
-	private IFileSystemService service = ServiceProvider.getInstance().getFileSystemService();
+	private FileSystemService service = ServiceProvider.getInstance().getFileSystemService();
 
 
 	@Override

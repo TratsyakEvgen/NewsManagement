@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.IamgeService;
+import by.htp.ex.service.NewsHeaderService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.service.ServiceUserExeption;
@@ -15,30 +15,27 @@ import by.htp.ex.util.name.ParamName;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-public class DoAddImage implements Command{
+public class DoSelectUser implements Command{
 	
-	private IamgeService service = ServiceProvider.getInstance().getIamgeService();
+	private final NewsHeaderService service = ServiceProvider.getInstance().getNewsHeaderService();
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String link = request.getParameter(ParamName.LINK);
-		HttpSession session = request.getSession();		
-		
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+
 		try {
-			service.add(link);
-			response.sendRedirect(LinkName.COMMAND_GO_TO_GALLERY + LinkName.MESSAGE_DONE);
-		} catch (ServiceException e) {
+			int idUser = Integer.parseInt(request.getParameter(ParamName.ID));
+			int idNews = Integer.parseInt(request.getParameter(ParamName.ID_NEWS));
+			service.udateUser(idNews, idUser);
+			response.sendRedirect(LinkName.COMMAND_GO_TO_UPDATE_NEWS + LinkName.ID + idNews+LinkName.MESSAGE_DONE);
+		} catch (ServiceException | NumberFormatException e) {
 			ConsoleLogger.getInstance().warn(e);
 			request.setAttribute(ParamName.ERROR, 500);
 			request.getRequestDispatcher(LinkName.COMMAND_GO_TO_ERROR_PAGE).forward(request, response);
 		} catch (ServiceUserExeption e) {
 			Map<String, Object> mapAttrError = new HashMap<>();
 			mapAttrError.put(ParamName.ERROR, e.getMessage());
-			mapAttrError.put(ParamName.LINK, link);
-			mapAttrError.put(ParamName.MARKER, 0);
-			session.setAttribute(ParamName.MAP_ATTR_ERROR, mapAttrError);
+			request.getSession().setAttribute(ParamName.MAP_ATTR_ERROR, mapAttrError);
 			response.sendRedirect(LinkName.MESSAGE_ERROR);
 		}
 		

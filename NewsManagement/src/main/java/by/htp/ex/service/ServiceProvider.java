@@ -1,9 +1,10 @@
 package by.htp.ex.service;
 
-import by.htp.ex.service.impl.FileSystemService;
-import by.htp.ex.service.impl.ImageService;
-import by.htp.ex.service.impl.NewsService;
-import by.htp.ex.service.impl.UserService;
+import by.htp.ex.service.impl.FileSystemServiceImpl;
+import by.htp.ex.service.impl.ImageServiceImpl;
+import by.htp.ex.service.impl.NewsHeaderServiceImpl;
+import by.htp.ex.service.impl.NewsServiceImpl;
+import by.htp.ex.service.impl.UserServiceImpl;
 
 public final class ServiceProvider {
 	private static final ServiceProvider instance = new ServiceProvider();
@@ -11,25 +12,30 @@ public final class ServiceProvider {
 	private ServiceProvider() {
 	}
 
-	private final IUserService userService = new UserService();
-	private final INewsService newsService = new NewsService();
-	private final IFileSystemService fileSystemService = new FileSystemService();
-	private final IIamgeService iamgeService = new ImageService();
+	private final UserService userService = new UserServiceImpl();
+	private final NewsService newsService = new NewsServiceImpl();
+	private final FileSystemService fileSystemService = new FileSystemServiceImpl();
+	private final IamgeService iamgeService = new ImageServiceImpl();
+	private final NewsHeaderService newsHeaderService = new NewsHeaderServiceImpl();
 
-	public INewsService getNewsService() {
+	public NewsService getNewsService() {
 		return newsService;
 	}
 
-	public IUserService getUserService() {
+	public UserService getUserService() {
 		return userService;
 	}
 
-	public IFileSystemService getFileSystemService() {
+	public FileSystemService getFileSystemService() {
 		return fileSystemService;
 	}
 	
-	public IIamgeService getIamgeService() {
+	public IamgeService getIamgeService() {
 		return iamgeService;
+	}
+
+	public NewsHeaderService getNewsHeaderService() {
+		return newsHeaderService;
 	}
 
 	public static ServiceProvider getInstance() {

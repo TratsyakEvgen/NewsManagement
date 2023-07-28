@@ -4,7 +4,7 @@ import java.util.List;
 
 import by.htp.ex.bean.Image;
 
-public interface IIamgeService {
+public interface IamgeService {
 
 	List<Image> getAllImages() throws ServiceException;
 

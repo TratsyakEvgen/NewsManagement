@@ -32,3 +32,7 @@
 <c:if test="${requestScope.main_presentation == 'news_list'}">
 	<c:import url="/WEB-INF/pages/tiles/newsManagementList.jsp" />
 </c:if>
+
+<c:if test="${requestScope.main_presentation == 'update_news'}">
+	<c:import url="/WEB-INF/pages/tiles/updateNews.jsp" />
+</c:if>

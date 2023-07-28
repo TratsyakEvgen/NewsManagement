@@ -1,32 +1,40 @@
 package by.htp.ex.dao;
 
-import by.htp.ex.dao.impl.ImageDAO;
-import by.htp.ex.dao.impl.NewsDAO;
-import by.htp.ex.dao.impl.UserDAO;
+import by.htp.ex.dao.impl.ImageDAOImpl;
+import by.htp.ex.dao.impl.NewsDAOImpl;
+import by.htp.ex.dao.impl.NewsHeaderDAOImpl;
+import by.htp.ex.dao.impl.UserDAOImpl;
 
 public final class DaoProvider {
 	private static final DaoProvider instance = new DaoProvider();
 
-	private final IUserDAO userDao = new UserDAO();
-	private final INewsDAO newsDAO = new NewsDAO();
-	private final IImageDAO imageDAO = new ImageDAO();
+	private final UserDAO userDao = new UserDAOImpl();
+	private final NewsDAO newsDAO = new NewsDAOImpl();
+	private final ImageDAO imageDAO = new ImageDAOImpl();
+	private final NewsHeaderDAO newsHeaderDAO = new NewsHeaderDAOImpl();
 
 	private DaoProvider() {
 	}
 
-	public IUserDAO getUserDao() {
+	public UserDAO getUserDao() {
 		return userDao;
 	}
 
-	public INewsDAO getNewsDAO() {
+	public NewsDAO getNewsDAO() {
 		return newsDAO;
 	}
 	
-	public IImageDAO getImageDAO() {
+	public ImageDAO getImageDAO() {
 		return imageDAO;
+	}
+
+	public NewsHeaderDAO getNewsHeaderDAO() {
+		return newsHeaderDAO;
 	}
 
 	public static DaoProvider getInstance() {
 		return instance;
 	}
+	
+	
 }

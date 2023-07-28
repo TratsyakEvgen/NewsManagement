@@ -14,15 +14,15 @@ import by.htp.ex.bean.Image;
 import by.htp.ex.bean.LocalContentNews;
 import by.htp.ex.bean.News;
 import by.htp.ex.bean.User;
-import by.htp.ex.dao.INewsDAO;
-import by.htp.ex.dao.NewsDAOException;
+import by.htp.ex.dao.DaoException;
+import by.htp.ex.dao.NewsDAO;
 import by.htp.ex.dao.connection.pool.ConnectionPool;
 import by.htp.ex.dao.connection.pool.ConnectionPoolException;
 
-public class NewsDAO implements INewsDAO {
+public class NewsDAOImpl implements NewsDAO {
 	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-	public NewsDAO() {
+	public NewsDAOImpl() {
 	}
 
 	private static final String QUERY_ACTIVE_NEWS_BY_LOCAL = "SELECT news.id, news.news_date, news.status, user_detailes.users_id, roles.role, "
@@ -37,7 +37,7 @@ public class NewsDAO implements INewsDAO {
 			+ "WHERE local.local = ? AND news.status = 1";
 
 	@Override
-	public Map<Integer, News> getActiveNewsByLocal(String local) throws NewsDAOException {
+	public Map<Integer, News> getActiveNewsByLocal(String local) throws DaoException {
 
 		Map<Integer, News> result = null;
 
@@ -49,12 +49,50 @@ public class NewsDAO implements INewsDAO {
 				result = convertResultSetInMap(resultSet);
 			}
 		} catch (SQLException e) {
-			throw new NewsDAOException("SQLException get all news by local.", e);
+			throw new DaoException("SQLException get all news by local.", e);
 		} catch (ConnectionPoolException e) {
-			throw new NewsDAOException("Сonnection setup error get all news by local.", e);
+			throw new DaoException("Сonnection setup error get all news by local.", e);
 		}
 
 		return result;
+	}
+	
+	
+	private static final String QUERY_NEWS_BY_ID = "SELECT news.id, news.news_date, news.status, user_detailes.users_id, roles.role, "
+			+ "user_detailes.name, user_detailes.surname, user_detailes.email, user_detailes.register_date, news_detailes.id, news_detailes.news_id, "
+			+ "news_detailes.title, news_detailes.link, local.local, images.id, images.link, images.status FROM news "
+			+ "LEFT JOIN news_detailes ON news.id = news_detailes.news_id "
+			+ "LEFT JOIN local ON news_detailes.local_id = local.id "
+			+ "LEFT JOIN user_detailes ON user_detailes.users_id = news.users_id "
+			+ "LEFT JOIN users ON user_detailes.users_id = users.id "
+			+ "LEFT JOIN roles ON users.roles_id = roles.id "
+			+ "LEFT JOIN images_in_news ON news.id = images_in_news.news_id "
+			+ "LEFT JOIN images ON images_in_news.images_id = images.id "
+			+ "WHERE news.id = ?";
+
+	@Override
+	public News getNewsById(int id) throws DaoException {
+
+		Map<Integer, News> result = null;
+
+		try (Connection connection = connectionPool.takeConnection();
+				PreparedStatement statment = connection.prepareStatement(QUERY_NEWS_BY_ID)) {
+
+			statment.setInt(1, id);
+			try (ResultSet resultSet = statment.executeQuery()) {
+				result = convertResultSetInMap(resultSet);
+			}
+		} catch (SQLException e) {
+			throw new DaoException("SQLException get news by id.", e);
+		} catch (ConnectionPoolException e) {
+			throw new DaoException("Сonnection setup error get news by id.", e);
+		}
+		
+		if (result == null) {
+			return null;
+		}
+
+		return result.entrySet().stream().findFirst().get().getValue();
 	}
 
 	private static final String QUERY_ACTIVE_NEWS_BY_LOCAL_CONTENT_ID = "SELECT news.id, news.news_date, news.status, user_detailes.users_id, roles.role, "
@@ -70,12 +108,12 @@ public class NewsDAO implements INewsDAO {
 	private static final String PATH_QUERY_ACTIVE_NEWS = " AND news.status = 1";
 
 	@Override
-	public News getNewsByLocalContentId(int id, boolean active) throws NewsDAOException {
+	public News getNewsByLocalContentId(int id, boolean active) throws DaoException {
 		Map<Integer, News> result = null;
-		
+
 		String sqlQuery = QUERY_ACTIVE_NEWS_BY_LOCAL_CONTENT_ID;
-		
-		if (active)	{
+
+		if (active) {
 			sqlQuery += PATH_QUERY_ACTIVE_NEWS;
 		}
 
@@ -87,9 +125,9 @@ public class NewsDAO implements INewsDAO {
 				result = convertResultSetInMap(resultSet);
 			}
 		} catch (SQLException e) {
-			throw new NewsDAOException("SQLException get all news by local.", e);
+			throw new DaoException("SQLException get all news by local.", e);
 		} catch (ConnectionPoolException e) {
-			throw new NewsDAOException("Сonnection setup error get all news by local.", e);
+			throw new DaoException("Сonnection setup error get all news by local.", e);
 		}
 
 		if (result == null) {
@@ -98,19 +136,24 @@ public class NewsDAO implements INewsDAO {
 
 		return result.entrySet().stream().findFirst().get().getValue();
 	}
+	
+	
+	
+	
 
 	private static final String QUERY_GET_ALL_NEWS = "SELECT news.id, news.news_date, news.status, user_detailes.users_id, roles.role, "
 			+ "user_detailes.name, user_detailes.surname, user_detailes.email, user_detailes.register_date, news_detailes.id, news_detailes.news_id, "
 			+ "news_detailes.title, news_detailes.link, local.local, images.id, images.link, images.status FROM news "
-			+ "JOIN news_detailes ON news.id = news_detailes.news_id "
-			+ "JOIN local ON news_detailes.local_id = local.id "
-			+ "JOIN user_detailes ON user_detailes.users_id = news.users_id "
-			+ "JOIN users ON user_detailes.users_id = users.id " + "JOIN roles ON users.roles_id = roles.id "
+			+ "LEFT JOIN news_detailes ON news.id = news_detailes.news_id "
+			+ "LEFT JOIN local ON news_detailes.local_id = local.id "
+			+ "LEFT JOIN user_detailes ON user_detailes.users_id = news.users_id "
+			+ "LEFT JOIN users ON user_detailes.users_id = users.id "
+			+ "LEFT JOIN roles ON users.roles_id = roles.id "
 			+ "LEFT JOIN images_in_news ON news.id = images_in_news.news_id "
 			+ "LEFT JOIN images ON images_in_news.images_id = images.id ";
 
 	@Override
-	public Map<Integer, News> getAll() throws NewsDAOException {
+	public Map<Integer, News> getAll() throws DaoException {
 
 		Map<Integer, News> result = null;
 
@@ -121,13 +164,16 @@ public class NewsDAO implements INewsDAO {
 				result = convertResultSetInMap(resultSet);
 			}
 		} catch (SQLException e) {
-			throw new NewsDAOException("SQLException get all news.", e);
+			throw new DaoException("SQLException get all news.", e);
 		} catch (ConnectionPoolException e) {
-			throw new NewsDAOException("Сonnection setup error get all news.", e);
+			throw new DaoException("Сonnection setup error get all news.", e);
 		}
 
 		return result;
 	}
+	
+	
+	
 
 	private Map<Integer, News> convertResultSetInMap(ResultSet resultSet) throws SQLException {
 		Map<Integer, News> mapNews = null;
@@ -163,7 +209,7 @@ public class NewsDAO implements INewsDAO {
 			}
 
 			int idLocalContentNews = resultSet.getInt(10);
-			if (!mapLocalContentNews.containsKey(idLocalContentNews)) {
+			if (idLocalContentNews != 0 && !mapLocalContentNews.containsKey(idLocalContentNews)) {
 				LocalContentNews localContentNews = new LocalContentNews();
 				localContentNews.setId(idLocalContentNews);
 				localContentNews.setIdNews(resultSet.getInt(11));
@@ -184,7 +230,7 @@ public class NewsDAO implements INewsDAO {
 				if (!images.contains(image)) {
 					images.add(image);
 				}
-				
+
 			}
 
 		}

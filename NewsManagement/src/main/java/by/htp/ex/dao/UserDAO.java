@@ -5,7 +5,7 @@ import java.util.Map;
 
 import by.htp.ex.bean.User;
 
-public interface IUserDAO {	
+public interface UserDAO {	
 	User findByLogin(String login) throws DaoException;
 	boolean matchPasswords(int id, String password) throws DaoException;
 	boolean isExistLogin(String login) throws DaoException;
@@ -15,4 +15,5 @@ public interface IUserDAO {
 	void updatePassword(int id, String password) throws DaoException;
 	void changeRole(Map<Integer, String> roles) throws DaoException;
 	List<User> getAll() throws DaoException;
+	boolean isExistUser(int id) throws DaoException;
 }

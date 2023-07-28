@@ -5,7 +5,7 @@ import java.util.List;
 
 import by.htp.ex.bean.User;
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.IUserService;
+import by.htp.ex.service.UserService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.util.logger.ConsoleLogger;
@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class GoToListUsers implements Command{
 	
-	private final IUserService service = ServiceProvider.getInstance().getUserService();
+	private final UserService service = ServiceProvider.getInstance().getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

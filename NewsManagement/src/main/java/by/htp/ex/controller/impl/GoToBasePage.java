@@ -6,7 +6,7 @@ import java.util.List;
 
 import by.htp.ex.bean.News;
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.INewsService;
+import by.htp.ex.service.NewsService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.util.logger.ConsoleLogger;
@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class GoToBasePage implements Command {
 
-	private final INewsService service = ServiceProvider.getInstance().getNewsService();
+	private final NewsService service = ServiceProvider.getInstance().getNewsService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
