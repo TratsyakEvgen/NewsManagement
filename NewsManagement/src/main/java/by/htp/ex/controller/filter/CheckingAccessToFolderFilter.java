@@ -8,19 +8,21 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class FolderFilter implements Filter {
+public class CheckingAccessToFolderFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession();
 		if (session.getAttribute(ParamName.USER) == null) {
-			System.out.println("fgdgdgdfg");
+			httpResponse.sendError(401);			
 		} else {
-			chain.doFilter(httpRequest, response);
+			chain.doFilter(request, response);
 		}
 
 	}

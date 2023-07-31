@@ -115,7 +115,7 @@
 										<td><c:if test="${localContent.local == 'en'}">${en}</c:if>
 											<c:if test="${localContent.local == 'ru'}">${ru}</c:if></td>
 										<td><a
-											href="href=controller?command=go_to_view_news_as_admin&id=${localContent.id}">
+											href="controller?command=go_to_view_news_as_admin&id=${localContent.id}">
 												${localContent.title}</a></td>
 										<td><a href="${localContent.link}">${localContent.link}</a>
 										</td>

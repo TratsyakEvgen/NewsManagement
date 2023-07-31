@@ -26,14 +26,14 @@
 				<div class="carousel-inner">
 					<div class="carousel-item active">
 						<p>
-							<a
-								<c:set var="localContent" value="${news_list.get(0).listLocalContentNews.get(0)}"></c:set>
+							<a							
+								<c:set var="localContent" value="${news_list.get(0).listLocalContentNews.get(0)}"/>
 								href="controller?command=go_to_view_news&id=${localContent.id}">
-								<c:set var="listImages" value="${news_list.get(0).images}"></c:set>
+								<c:set var="listImages" value="${news_list.get(0).images}"/>
 								<c:if test="${listImages.isEmpty()}">
-									<img src="images/gray.png" class="d-block w-100">
+									<img src="images/gray.png" class="d-block w-100" style="height: 500px;">
 								</c:if> <c:if test="${!listImages.isEmpty()}">
-									<img src="${listImages.get(0).link}" class="d-block w-100">
+									<img src="${listImages.get(0).link}" class="d-block w-100" style="height: 500px;">
 								</c:if>
 							</a>
 						</p>
@@ -46,16 +46,15 @@
 					<c:if test="${news_list.size() > 0}">
 						<c:forEach var="news" items="${news_list}" begin="1">
 							<div class="carousel-item">
-								<c:set var="image" value="${news.images.get(0).link}"></c:set>
 								<p>
 									<a
-										<c:set var="localContent" value="${news.listLocalContentNews.get(0)}"></c:set>
+										<c:set var="localContent" value="${news.listLocalContentNews.get(0)}"/>
 										href="controller?command=go_to_view_news&id=${localContent.id}">
-										<c:set var="listImages" value="${news.images}"></c:set> <c:if
+										<c:set var="listImages" value="${news.images}"/> <c:if
 											test="${listImages.isEmpty()}">
-											<img src="images/gray.png" class="d-block w-100">
+											<img src="images/gray.png" class="d-block w-100" style="height: 500px;">
 										</c:if> <c:if test="${!listImages.isEmpty()}">
-											<img src="${listImages.get(0).link}" class="d-block w-100">
+											<img src="${listImages.get(0).link}" class="d-block w-100" style="height: 500px;">
 										</c:if>
 									</a>
 								</p>

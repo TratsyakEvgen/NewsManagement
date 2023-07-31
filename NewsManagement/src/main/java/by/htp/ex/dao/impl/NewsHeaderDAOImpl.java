@@ -45,7 +45,7 @@ public class NewsHeaderDAOImpl implements NewsHeaderDAO {
 		return id;
 	}
 
-	private static final String QUERY_UPDATE_USER = "INSERT INTO news (news.news_date, news.status, news.users_id) VALUE (?,?,?)";
+	private static final String QUERY_UPDATE_USER = "UPDATE news SET news.users_id=? WHERE news.id =?";
 
 	@Override
 	public void updateUser(int idNews, int idUser) throws DaoException {
@@ -61,6 +61,26 @@ public class NewsHeaderDAOImpl implements NewsHeaderDAO {
 			throw new DaoException("SQLException update user in news.", e);
 		} catch (ConnectionPoolException e) {
 			throw new DaoException("Сonnection setup error update user in news.", e);
+		}
+
+	}
+
+	private static final String QUERY_UPDATE_STATUS = "UPDATE news SET news.status=? WHERE news.id =?";
+
+	@Override
+	public void updateStatus(int idNews, boolean status) throws DaoException {
+
+		try (Connection connection = connectionPool.takeConnection();
+				PreparedStatement statment = connection.prepareStatement(QUERY_UPDATE_STATUS)) {
+
+			statment.setBoolean(1, status);
+			statment.setInt(2, idNews);
+			statment.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DaoException("SQLException update status news.", e);
+		} catch (ConnectionPoolException e) {
+			throw new DaoException("Сonnection setup error update status news.", e);
 		}
 
 	}

@@ -33,10 +33,18 @@ public class NewsHeaderServiceImpl implements NewsHeaderService {
 	}
 
 	@Override
-	public void udateUser(int idNews, int idUser) throws ServiceException, ServiceUserExeption {
+	public void updateUser(int idNews, int idUser) throws ServiceException {
 		try {
 			newsHeaderDAO.updateUser(idNews, idUser);
-
+		} catch (DaoException e) {
+			throw new ServiceException("Can't create news", e);
+		}
+	}
+	
+	@Override
+	public void updateStatus(int idNews, boolean status) throws ServiceException {
+		try {
+			newsHeaderDAO.updateStatus(idNews, status);
 		} catch (DaoException e) {
 			throw new ServiceException("Can't create news", e);
 		}

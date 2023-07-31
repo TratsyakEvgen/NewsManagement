@@ -30,8 +30,14 @@
 <fmt:message bundle="${loc}" key="local.select" var="select" />
 <fmt:message bundle="${loc}" key="local.update" var="update" />
 <fmt:message bundle="${loc}" key="local.save" var="save" />
+<fmt:message bundle="${loc}" key="local.content" var="content" />
+<fmt:message bundle="${loc}" key="local.back" var="back" />
 
 <c:set var="news" value="${requestScope.news}" />
+<div class="d-flex flex-row  mb-3">
+	<a href="controller?command=go_to_news_management"
+		class="btn btn-dark btn-outline-light">${back}</a>
+</div>
 <div class="row table-responsive">
 	<table class="table table-hover table-bordered">
 		<tbody>
@@ -199,6 +205,26 @@
 
 						</form>
 					</div></td>
+
+			</tr>
+			<tr>
+				<td>${status}</td>
+				<td>
+					<div class="d-flex flex-row  mb-3">
+						<form action="controller" method="post">
+							<input type="hidden" name="command" value="do_update_status_news">
+							<input type="hidden" name="id_news" value="${news.id}">
+							<div class="d-flex flex-row  mb-3">
+								<select class="form-select" name="status">
+									<option value="true"
+										<c:if test="${news.status}">selected</c:if>>${active}</option>
+									<option value="en" <c:if test="${!news.status}">selected</c:if>>${deleted}</option>
+								</select> <input type="submit" class="btn btn-dark btn-outline-light"
+									value="${save}">
+							</div>
+						</form>
+					</div>
+				</td>
 			</tr>
 		</tbody>
 	</table>

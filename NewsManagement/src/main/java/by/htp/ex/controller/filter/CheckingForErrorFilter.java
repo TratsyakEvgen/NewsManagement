@@ -13,14 +13,13 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-public class ErrorFilter implements Filter {
+public class CheckingForErrorFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpSession session = httpRequest.getSession();
-
 		if (httpRequest.getParameter(ParamName.ERROR) != null) {
 			@SuppressWarnings("unchecked")
 			Map<String, Object> mapAttrError = (Map<String, Object>) session.getAttribute(ParamName.MAP_ATTR_ERROR);

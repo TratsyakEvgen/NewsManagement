@@ -29,7 +29,7 @@
 
 	<filter>
 		<filter-name>Folder</filter-name>
-		<filter-class>by.htp.ex.controller.filter.FolderFilter</filter-class>
+		<filter-class>by.htp.ex.controller.filter.CheckingAccessToFolderFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -53,7 +53,7 @@
 
 	<filter>
 		<filter-name>Local</filter-name>
-		<filter-class>by.htp.ex.controller.filter.LocalFilter</filter-class>
+		<filter-class>by.htp.ex.controller.filter.CheckingLocalFilter</filter-class>
 		<init-param>
 			<param-name>local</param-name>
 			<param-value>en</param-value>
@@ -67,7 +67,7 @@
 
 	<filter>
 		<filter-name>Error</filter-name>
-		<filter-class>by.htp.ex.controller.filter.ErrorFilter</filter-class>
+		<filter-class>by.htp.ex.controller.filter.CheckingForErrorFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -75,11 +75,18 @@
 		<url-pattern>/controller</url-pattern>
 	</filter-mapping>
 	
+	<filter>
+		<filter-name>Command</filter-name>
+		<filter-class>by.htp.ex.controller.filter.CheckingPermissionsExecuteCommandFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Command</filter-name>
+		<url-pattern>/controller</url-pattern>
+	</filter-mapping>
+	
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/error.jsp</location>
 	</error-page>
-	
-
-
 </web-app>

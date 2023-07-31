@@ -13,7 +13,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-public class LocalFilter implements Filter {
+public class CheckingLocalFilter implements Filter {
 	
 	private String defaultLocal;
 

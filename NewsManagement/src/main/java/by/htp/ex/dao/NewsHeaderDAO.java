@@ -13,4 +13,6 @@ public interface NewsHeaderDAO {
 
 	void deleteImage(int idNews, int idImage) throws DaoException;
 
+	void updateStatus(int idNews, boolean status) throws DaoException;
+
 }

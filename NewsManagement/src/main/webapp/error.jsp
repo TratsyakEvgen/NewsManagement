@@ -22,6 +22,8 @@
 <fmt:message bundle="${loc}"
 	key="local.we.are.already.working.on.the.problem"
 	var="working_on_problem" />
+<fmt:message bundle="${loc}" key="local.unauthorized" var="unauthorized" />
+<fmt:message bundle="${loc}" key="local.not.enouge.right" var="not_enouge_right" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,8 +48,9 @@
 				<c:if test="${status == 404}">${page_not_found}<p
 						class="lead">${page_exist}</p>
 				</c:if>
-				<c:if test="${status >= 500}">${server_error}<p
-						class="lead">${working_on_problem}</p>
+				<c:if test="${status == 500}">${server_error}<p class="lead">${working_on_problem}</p>
+				</c:if>
+				<c:if test="${status == 401}">${unauthorized}<p class="lead">${not_enouge_right}</p>
 				</c:if>
 			</p>
 			<a href="controller?command=go_to_base_page" class="btn btn-dark">${back}</a>

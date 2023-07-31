@@ -12,7 +12,10 @@
 <fmt:message bundle="${loc}" key="local.sign.out" var="sign_out" />
 <fmt:message bundle="${loc}" key="local.news.management"
 	var="news_management" />
-<fmt:message bundle="${loc}" key="local.find" var="find" />
+<fmt:message bundle="${loc}" key="local.main" var="main" />
+<fmt:message bundle="${loc}" key="local.profile" var="profile" />
+<fmt:message bundle="${loc}" key="local.control.panel"
+	var="control_panel" />
 
 <c:set var="user" value="${sessionScope.user}"></c:set>
 
@@ -25,10 +28,16 @@
 			<a class="navbar-brand" type="button" data-bs-toggle="dropdown">${news_management}</a>
 			<ul class="dropdown-menu">
 				<li><a class="dropdown-item"
-					href="controller?command=go_to_base_page">Main</a></li>
+					href="controller?command=go_to_base_page">${main}</a></li>
 				<c:if test="${user.role == 'admin'}">
 					<li><a class="dropdown-item"
-						href="controller?command=go_to_admin_menu">Admin menu</a></li>
+						href="controller?command=go_to_admin_menu">${control_panel}</a></li>
+				</c:if>
+				<c:if test="${user != null}">
+					<li><a href="controller?command=go_to_account"
+						class="dropdown-item">${profile}</a></li>
+					<li><a href="controller?command=do_sign_out"
+						class="dropdown-item">${sign_out}</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -64,11 +73,6 @@
 			</c:if>
 
 			<c:if test="${user != null}">
-				<form class="d-flex mb-2 me-2" role="search">
-					<input class="form-control me-2" type="search"
-						placeholder="${find}">
-					<button class="btn btn-dark btn-outline-light" type="submit">${find}</button>
-				</form>
 				<div class="d-flex mb-2 me-2">
 					<a href="controller?command=go_to_account"
 						class="btn btn-dark btn-outline-light">${user.surname}

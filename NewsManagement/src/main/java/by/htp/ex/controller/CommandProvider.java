@@ -14,6 +14,7 @@ import by.htp.ex.controller.impl.DoUpdateFile;
 import by.htp.ex.controller.impl.DoUpdateImage;
 import by.htp.ex.controller.impl.DoUpdatePassword;
 import by.htp.ex.controller.impl.DoUpdateRole;
+import by.htp.ex.controller.impl.DoUpdateStatusNews;
 import by.htp.ex.controller.impl.DoUploadFile;
 import by.htp.ex.controller.impl.GoToAccount;
 import by.htp.ex.controller.impl.GoToAdminMenu;
@@ -80,6 +81,7 @@ public final class CommandProvider {
 		commands.put(CommandName.DO_UPDATE_CONTENT, new DoUpdateContent());
 		commands.put(CommandName.DO_ADD_CONTENT, new DoAddContent());
 		commands.put(CommandName.DO_DELETE_CONTENT, new DoDeleteContent());
+		commands.put(CommandName.DO_UPDATE_STATUS_NEWS, new DoUpdateStatusNews());
 	}
 	
 	public final static CommandProvider getInstance() {

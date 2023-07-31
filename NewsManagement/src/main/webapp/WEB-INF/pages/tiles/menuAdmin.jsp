@@ -8,11 +8,11 @@
 	var="file_system_images" />
 <fmt:message bundle="${loc}" key="local.file.system.documents"
 	var="file_system_documents" />
-<fmt:message bundle="${loc}" key="local.gallery"
-	var="gallery" />
-	<fmt:message bundle="${loc}" key="local.news.management"
+<fmt:message bundle="${loc}" key="local.gallery" var="gallery" />
+<fmt:message bundle="${loc}" key="local.news.management"
 	var="news_management" />
-		
+<fmt:message bundle="${loc}" key="local.back" var="back" />
+
 
 
 <ul class="nav flex-column">
@@ -22,7 +22,7 @@
 		<hr class="my-3"></li>
 	<li><a class="text-decoration-none text-reset"
 		href="controller?command=go_to_news_management">${news_management}</a>
-		<hr class="my-3"></li>	
+		<hr class="my-3"></li>
 	<li><a class="text-decoration-none text-reset"
 		href="controller?command=go_to_gallery">${gallery}</a>
 		<hr class="my-3"></li>
@@ -31,9 +31,8 @@
 		<hr class="my-3"></li>
 	<li><a class="text-decoration-none text-reset"
 		href="controller?command=go_to_file_system&dir=images">${file_system_documents}</a>
+		<hr class="my-3"></li>
 	</li>
-
-
 	<li><a class="text-decoration-none text-reset"
-		href="controller?command=go_to_base_page">${back}</a>
+		href="controller?command=go_to_base_page">${back}</a></li>
 </ul>

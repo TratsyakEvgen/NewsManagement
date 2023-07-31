@@ -13,17 +13,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class DoSelectUser implements Command{
+public class DoUpdateStatusNews implements Command{
 	
 	private final NewsHeaderService service = ServiceProvider.getInstance().getNewsHeaderService();
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int idUser = Integer.parseInt(request.getParameter(ParamName.ID));
+			boolean status = Boolean.parseBoolean(request.getParameter(ParamName.STATUS));
 			int idNews = Integer.parseInt(request.getParameter(ParamName.ID_NEWS));
-			service.updateUser(idNews, idUser);
+			service.updateStatus(idNews, status);
 			response.sendRedirect(LinkName.COMMAND_GO_TO_UPDATE_NEWS + LinkName.ID + idNews+LinkName.MESSAGE_DONE);
 		} catch (ServiceException | NumberFormatException e) {
 			ConsoleLogger.getInstance().warn(e);

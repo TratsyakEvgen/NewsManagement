@@ -6,11 +6,23 @@
 <fmt:message bundle="${loc}" key="local.news.title" var="news_title" />
 <fmt:message bundle="${loc}" key="local.news.date" var="news_date" />
 <fmt:message bundle="${loc}" key="local.news.author" var="author" />
+<fmt:message bundle="${loc}" key="local.back" var="back" />
+<fmt:message bundle="${loc}" key="local.update" var="update" />
 
 <c:set var="news" value="${requestScope.news}"></c:set>
 <c:set var="localContent" value="${news.listLocalContentNews.get(0)}"></c:set>
+<c:set var="user" value="${sessionScope.user}"></c:set>
 
 <div class="row">
+	<div class="d-flex flex-row  mb-3">
+		<c:if test="${user.role == 'admin'}">
+			<a class="btn btn-dark btn-outline-light"
+				href="controller?command=go_to_update_news&id=${news.id}">${update}</a>
+		</c:if>
+
+		<a href="controller?command=go_to_base_page"
+			class="btn btn-dark btn-outline-light">${back}</a>
+	</div>
 	<div class="col">
 		<div class="row">
 			<div class="col-2">
@@ -37,7 +49,7 @@
 			</div>
 			<div class="col-10">
 				<c:set var="author" value="${news.author}"></c:set>
-				<h5>${author.surname}${author.name}</h5>
+				<h5>${author.surname} ${author.name}</h5>
 			</div>
 		</div>
 	</div>
@@ -51,12 +63,12 @@
 			<div id="carousel" class="carousel slide carousel-fade">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="${images.get(0).link}" class="d-block w-100">
+						<img src="${images.get(0).link}" class="d-block w-100" style="height: 500px;">
 					</div>
 					<c:if test="${images.size() > 1}">
 						<c:forEach var="image" items="${images}" begin="1">
 							<div class="carousel-item">
-								<img src="${image.link}" class="d-block w-100">
+								<img src="${image.link}" class="d-block w-100" style="height: 500px;">
 							</div>
 						</c:forEach>
 					</c:if>
