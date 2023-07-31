@@ -1,6 +1,7 @@
 package by.htp.ex.dao;
 
 import by.htp.ex.dao.impl.ImageDAOImpl;
+import by.htp.ex.dao.impl.LocalContentNewsDAOImpl;
 import by.htp.ex.dao.impl.NewsDAOImpl;
 import by.htp.ex.dao.impl.NewsHeaderDAOImpl;
 import by.htp.ex.dao.impl.UserDAOImpl;
@@ -12,6 +13,7 @@ public final class DaoProvider {
 	private final NewsDAO newsDAO = new NewsDAOImpl();
 	private final ImageDAO imageDAO = new ImageDAOImpl();
 	private final NewsHeaderDAO newsHeaderDAO = new NewsHeaderDAOImpl();
+	private final LocalContentNewsDAO localContentNewsDAO = new LocalContentNewsDAOImpl();
 
 	private DaoProvider() {
 	}
@@ -30,6 +32,10 @@ public final class DaoProvider {
 
 	public NewsHeaderDAO getNewsHeaderDAO() {
 		return newsHeaderDAO;
+	}
+
+	public LocalContentNewsDAO getLocalContentNewsDAO() {
+		return localContentNewsDAO;
 	}
 
 	public static DaoProvider getInstance() {

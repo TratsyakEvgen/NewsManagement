@@ -9,6 +9,7 @@ public class LinkName {
 	public static final String COMMAND_GO_TO_NEWS_MANAGEMENT = "controller?command=go_to_news_management";
 	public static final String COMMAND_GO_TO_UPDATE_NEWS = "controller?command=go_to_update_news";
 	public static final String COMMAND_GO_TO_SELECT_USER = "controller?command=go_to_select_user";
+	public static final String COMMAND_GO_TO_SELECT_IMAGE = "controller?command=go_to_select_image";
 	public static final String COMMAND_GO_TO_LIST_USERS = "controller?command=go_to_list_users";
 	public static final String COMMAND_GO_TO_GALLERY = "controller?command=go_to_gallery";
 	public static final String COMMAND_GO_TO_FILE_SYSTEM = "controller?command=go_to_file_system";

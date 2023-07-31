@@ -2,7 +2,6 @@ package by.htp.ex.controller.impl;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import by.htp.ex.bean.News;
@@ -26,7 +25,6 @@ public class GoToViewNewsAsAdmin implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();		
-		String local = (String) session.getAttribute(ParamName.LOCAL);
 
 		try {
 			int id = Integer.parseInt(request.getParameter(ParamName.ID));

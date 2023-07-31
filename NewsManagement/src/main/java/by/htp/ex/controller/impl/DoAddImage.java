@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import by.htp.ex.controller.Command;
-import by.htp.ex.service.IamgeService;
+import by.htp.ex.service.ImageService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceProvider;
 import by.htp.ex.service.ServiceUserExeption;
@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class DoAddImage implements Command{
 	
-	private IamgeService service = ServiceProvider.getInstance().getIamgeService();
+	private ImageService service = ServiceProvider.getInstance().getImageService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

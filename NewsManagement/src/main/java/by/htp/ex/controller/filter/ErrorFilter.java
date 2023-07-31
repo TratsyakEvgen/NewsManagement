@@ -24,7 +24,9 @@ public class ErrorFilter implements Filter {
 		if (httpRequest.getParameter(ParamName.ERROR) != null) {
 			@SuppressWarnings("unchecked")
 			Map<String, Object> mapAttrError = (Map<String, Object>) session.getAttribute(ParamName.MAP_ATTR_ERROR);
-			mapAttrError.entrySet().forEach(e -> httpRequest.setAttribute(e.getKey(), e.getValue()));
+			if (mapAttrError != null) {
+				mapAttrError.entrySet().forEach(e -> httpRequest.setAttribute(e.getKey(), e.getValue()));
+			}
 			String link = (String) session.getAttribute(ParamName.GO_TO_BACK);
 			if (link == null) {
 				link = LinkName.ERROR_JSP;

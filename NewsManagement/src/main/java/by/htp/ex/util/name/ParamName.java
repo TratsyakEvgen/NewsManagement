@@ -45,4 +45,5 @@ public class ParamName {
 	public static final String UPDATE_NEWS = "update_news";
 	public static final String SELECT = "select";
 	public static final String ID_NEWS = "id_news";
+	public static final String TITLE = "title";
 }

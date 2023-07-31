@@ -1,6 +1,6 @@
 package by.htp.ex.util.validation;
 
-public interface ImageDataValidation {
+public interface LinkDataValidation {
 
 	void isLink(String link) throws ValidationException;
 

@@ -6,4 +6,8 @@ public interface NewsHeaderService {
 
 	void udateUser(int idNews, int idUser) throws ServiceException, ServiceUserExeption;
 
+	void addImage(int idNews, int idImage) throws ServiceException, ServiceUserExeption;
+
+	void deleteImage(int idNews, int idImage) throws ServiceException;
+
 }

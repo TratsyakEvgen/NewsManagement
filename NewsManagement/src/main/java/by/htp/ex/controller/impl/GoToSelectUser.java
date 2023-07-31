@@ -33,7 +33,7 @@ public class GoToSelectUser implements Command {
 		try {
 			int id = Integer.parseInt(request.getParameter(ParamName.ID));
 			News news = newsService.getNewsById(id);
-			request.getSession().setAttribute(ParamName.GO_TO_BACK, LinkName.COMMAND_GO_TO_SELECT_USER);
+			request.getSession().setAttribute(ParamName.GO_TO_BACK, LinkName.COMMAND_GO_TO_SELECT_USER + LinkName.ID + id);
 			request.setAttribute(ParamName.MENU_PRESENTATION, ParamName.VIEW_ADMIN);
 			request.setAttribute(ParamName.MAIN_PRESENTATION, ParamName.UPDATE_NEWS);
 			request.setAttribute(ParamName.NEWS, news);

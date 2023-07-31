@@ -15,5 +15,4 @@ public interface UserDAO {
 	void updatePassword(int id, String password) throws DaoException;
 	void changeRole(Map<Integer, String> roles) throws DaoException;
 	List<User> getAll() throws DaoException;
-	boolean isExistUser(int id) throws DaoException;
 }

@@ -7,19 +7,19 @@ import by.htp.ex.bean.Image;
 import by.htp.ex.dao.DaoException;
 import by.htp.ex.dao.DaoProvider;
 import by.htp.ex.dao.ImageDAO;
-import by.htp.ex.service.IamgeService;
+import by.htp.ex.service.ImageService;
 import by.htp.ex.service.ServiceException;
 import by.htp.ex.service.ServiceUserExeption;
 import by.htp.ex.util.lock.ReentrantLockSingleton;
 import by.htp.ex.util.name.LocalName;
-import by.htp.ex.util.validation.ImageDataValidation;
+import by.htp.ex.util.validation.LinkDataValidation;
 import by.htp.ex.util.validation.ValidationException;
 import by.htp.ex.util.validation.ValidationProvider;
 
-public class ImageServiceImpl implements IamgeService{
+public class ImageServiceImpl implements ImageService{
 	
 	private final ImageDAO imageDAO =  DaoProvider.getInstance().getImageDAO();
-	private final ImageDataValidation imageDataValidation = ValidationProvider.getInstance().getImageDataValidation();
+	private final LinkDataValidation linkDataValidation = ValidationProvider.getInstance().getLinkDataValidation();
 	
 	@Override
 	public List<Image> getAllImages() throws ServiceException{
@@ -36,7 +36,7 @@ public class ImageServiceImpl implements IamgeService{
 	@Override
 	public void add(String link) throws ServiceException, ServiceUserExeption{
 		try {
-			imageDataValidation.isLink(link);
+			linkDataValidation.isLink(link);
 		} catch (ValidationException e) {
 			throw new ServiceUserExeption(e.getMessage());
 		}
@@ -64,7 +64,7 @@ public class ImageServiceImpl implements IamgeService{
 	@Override
 	public void update(Image image) throws ServiceException, ServiceUserExeption{
 		try {
-			imageDataValidation.isLink(image.getLink());
+			linkDataValidation.isLink(image.getLink());
 		} catch (ValidationException e) {
 			throw new ServiceUserExeption(e.getMessage());
 		}

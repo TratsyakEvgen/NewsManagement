@@ -29,7 +29,7 @@ public class GoToUpdateNews implements Command{
 		try {
 			int id = Integer.parseInt(request.getParameter(ParamName.ID));
 			News news = service.getNewsById(id);
-			request.getSession().setAttribute(ParamName.GO_TO_BACK, LinkName.COMMAND_GO_TO_UPDATE_NEWS);	
+			request.getSession().setAttribute(ParamName.GO_TO_BACK, LinkName.COMMAND_GO_TO_UPDATE_NEWS + LinkName.ID + id);	
 			request.setAttribute(ParamName.MENU_PRESENTATION, ParamName.VIEW_ADMIN);
 			request.setAttribute(ParamName.MAIN_PRESENTATION, ParamName.UPDATE_NEWS);
 			request.setAttribute(ParamName.NEWS, news);

@@ -7,4 +7,10 @@ public interface NewsHeaderDAO {
 
 	void updateUser(int idNews, int idUser) throws DaoException;
 
+	void addImage(int idNews, int idImage) throws DaoException;
+
+	boolean isExistImageInNews(int idNews, int idImage) throws DaoException;
+
+	void deleteImage(int idNews, int idImage) throws DaoException;
+
 }

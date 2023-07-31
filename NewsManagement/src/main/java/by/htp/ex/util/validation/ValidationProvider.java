@@ -1,13 +1,13 @@
 package by.htp.ex.util.validation;
 
-import by.htp.ex.util.validation.impl.ImageDataValidationImpl;
+import by.htp.ex.util.validation.impl.LinkDataValidationImpl;
 import by.htp.ex.util.validation.impl.UserDataValidationImpl;
 
 public class ValidationProvider {
 	private static final ValidationProvider instance = new ValidationProvider();
 	
 	private final UserDataValidation userDataValidation = new UserDataValidationImpl();
-	private final ImageDataValidation imageDataValidation = new ImageDataValidationImpl();
+	private final LinkDataValidation linkDataValidation = new LinkDataValidationImpl();
 	
 	private ValidationProvider() {		
 	}
@@ -16,8 +16,8 @@ public class ValidationProvider {
 		return userDataValidation;
 	}
 	
-	public ImageDataValidation getImageDataValidation() {
-		return imageDataValidation;
+	public LinkDataValidation getLinkDataValidation() {
+		return linkDataValidation;
 	}
 
 	public static ValidationProvider getInstance() {

@@ -9,6 +9,7 @@ import by.htp.ex.controller.impl.DoSelectImage;
 import by.htp.ex.controller.impl.DoSelectUser;
 import by.htp.ex.controller.impl.DoSignOut;
 import by.htp.ex.controller.impl.DoUpdateAccount;
+import by.htp.ex.controller.impl.DoUpdateContent;
 import by.htp.ex.controller.impl.DoUpdateFile;
 import by.htp.ex.controller.impl.DoUpdateImage;
 import by.htp.ex.controller.impl.DoUpdatePassword;
@@ -30,8 +31,10 @@ import by.htp.ex.controller.impl.GoToSelectUser;
 import by.htp.ex.controller.impl.GoToViewNews;
 import by.htp.ex.controller.impl.GoToViewNewsAsAdmin;
 import by.htp.ex.controller.impl.ChangeLocal;
+import by.htp.ex.controller.impl.DoAddContent;
 import by.htp.ex.controller.impl.DoAddImage;
 import by.htp.ex.controller.impl.DoDeleteAccount;
+import by.htp.ex.controller.impl.DoDeleteContent;
 import by.htp.ex.controller.impl.DoDeleteFile;
 import by.htp.ex.controller.impl.DoDeleteImageInNews;
 import by.htp.ex.controller.impl.DoRegistration;
@@ -74,6 +77,9 @@ public final class CommandProvider {
 		commands.put(CommandName.DO_SELECT_IMAGE, new DoSelectImage());
 		commands.put(CommandName.DO_SELECT_USER, new DoSelectUser());
 		commands.put(CommandName.DO_DELETE_IMAGE_IN_NEWS, new DoDeleteImageInNews());
+		commands.put(CommandName.DO_UPDATE_CONTENT, new DoUpdateContent());
+		commands.put(CommandName.DO_ADD_CONTENT, new DoAddContent());
+		commands.put(CommandName.DO_DELETE_CONTENT, new DoDeleteContent());
 	}
 	
 	public final static CommandProvider getInstance() {

@@ -159,26 +159,6 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 	
-	
-	
-	private static final String QUERY_FIND_USER_BY_ID = "SELECT users.id FROM users WHERE users.id =?";
-
-	@Override
-	public boolean isExistUser(int id) throws DaoException {
-		try (Connection connection = connectionPool.takeConnection();
-				PreparedStatement statment = connection.prepareStatement(QUERY_FIND_USER_BY_ID)) {
-
-			statment.setInt(1, id);
-			try (ResultSet resultSet = statment.executeQuery()) {
-				return resultSet.next();
-			}
-
-		} catch (SQLException e) {
-			throw new DaoException("SQLException find login.", e);
-		} catch (ConnectionPoolException e) {
-			throw new DaoException("Сonnection setup error find login.", e);
-		}
-	}
 
 	private static final String QUERY_INSERT_USERS = "INSERT INTO users (users.login, users.password, users.roles_id) "
 			+ "VALUE (?,?,(SELECT roles.id FROM roles WHERE roles.role=?))";
